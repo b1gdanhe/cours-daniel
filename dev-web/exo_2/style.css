@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    border: solid 5px black;
+    background-color: gainsboro;
+    width: 500px;
+}
+
+.title {
+    border-bottom: solid 5px black;
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px 10px 20px 18px;
+
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    font-weight: bold;
+    color: blue;
+}
+
+.value {
+    font-style: italic;
+    font-weight: normal;
+}
+
+.sign-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signature {
+    text-decoration: underline;
+    text-align: center;
+}
+
+.profil-image {
+    border-radius: 32px 0 32px 0;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+}
+
+.sign-img {
+    width: 100px;
+}
