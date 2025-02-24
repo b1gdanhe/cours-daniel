@@ -38,10 +38,10 @@
                             <td scope="row"><?= $user['age'] ?></td>
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="./detail.php?id=<?= $user['id']?>&amp;first_name=<?= $user['first_name']?>&last_name=<?= $user['last_name']?>&degree=<?= $user['degree']?>&age=<?= $user['age']?>&description=<?= $user['description']?>">
+                                    <a class="btn btn-primary" href="./detail.php?id=<?= $user['id'] ?>&first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning"  href="./edit.php?id=<?= $user['id']?>&first_name=<?= $user['first_name']?>&last_name=<?= $user['last_name']?>&degree=<?= $user['degree']?>&age=<?= $user['age']?>&description=<?= $user['description']?>">
+                                    <a class="btn btn-warning" href="./edit.php?id=<?= $user['id'] ?>">
                                         Modifier
                                     </a>
 
@@ -55,14 +55,6 @@
             </table>
         </div>
 
-        <!-- <div class="d-flex flex-column">
-            <div>Bonjour <?= "$last_name $first_name" ?></div>
-            <div>Vous avez <?= "$age" ?> ans</div>
-            <div>Votre Biographie </div>
-            <div><?= "$description" ?></div>
-            <div>Diplome </div>
-            <div><?= "$degree" ?></div>
-        </div> -->
     <?php else: ?>
 
         <div class="d-flex flec-column  w-75 align-items-center jsutify-content-center">
@@ -82,13 +74,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="name" class="form-label">Nom</label>
-                                <input class="form-control" id="name" type="text" name="last_name">
+                                <input class="form-control" id="name" type="text" name="last_name" value="<?= $last_name ?>">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="fname" class="form-label">Prénom</label>
-                                <input class="form-control" id="fname" type="text" name="first_name">
+                                <input class="form-control" id="fname" type="text" name="first_name" value="<?= $first_name ?>">
                             </div>
 
                         </div>
@@ -96,7 +88,7 @@
                     <div>
                         <div class="form-group">
                             <label for="textarea" class="form-label">Description</label>
-                            <textarea id="textarea" class="form-control" rows="5" cols="2" name="description">
+                            <textarea id="textarea" class="form-control" rows="5" cols="2" name="description"><?= $description ?>
                     </textarea>
                         </div>
                     </div>
@@ -105,11 +97,11 @@
                             <div class="form-group">
                                 <label for="date" class="form-label"> Dernie diplome</label>
                                 <select id="" class="form-select" name="degree">
-                                    <option value="CEP">CEP</option>
-                                    <option value="BEPC">BEPC</option>
-                                    <option value="BAC">BAC</option>
-                                    <option value="LICENCE">LICENCE</option>
-                                    <option value="MASTER">MASTER</option>
+                                    <option value="CEP" <?= selectedDegree('CEP', $degree) ? 'selected' : '' ?>>CEP</option>
+                                    <option value="BEPC"  <?= selectedDegree('BEPC', $degree) ? 'selected' : '' ?>>BEPC</option>
+                                    <option value="BAC" <?= selectedDegree('BAC', $degree) ? 'selected' : '' ?>>BAC</option>
+                                    <option value="LICENCE" <?= selectedDegree('LICENCE', $degree) ? 'selected' : '' ?>>LICENCE</option>
+                                    <option value="MASTER"  <?= selectedDegree('MASTER', $degree) ? 'selected' : '' ?>>MASTER</option>
                                 </select>
                             </div>
 
@@ -117,7 +109,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="date" class="form-label"> Age</label>
-                                <input class="form-control" id="number" type="number" name="age">
+                                <input class="form-control" id="number" type="number" name="age" value="<?= $age ?>">
                             </div>
                         </div>
                     </div>
