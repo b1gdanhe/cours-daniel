@@ -8,7 +8,7 @@ const DB_CONFIG = [
 ];
 
 
-function connectToDB($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $username = 'big', string $password = 'Big@big1')
+function connectToDB($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $username = 'root', string $password = 'Big@big1')
 {
     $db_config_format =  http_build_query($config, "", ";");
     $dns = "$db_system:$db_config_format";
