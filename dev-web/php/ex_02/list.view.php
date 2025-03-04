@@ -53,8 +53,8 @@
         </div>
     </nav>
     <div
-        class="table-responsive w-75  mt-4 container">
-        <form class="w-full  bg-white mb-2 p-3 rounded-1 shadow-sm" action="" method="post">
+        class="table-responsive w-100 mt-4 container p-5 bg-white shadow-sm">
+        <form class="w-full bg-white mb-2" action="" method="post">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
@@ -90,11 +90,11 @@
 
             </div>
         </form>
-        <div>
+        <div class="">
             <span>Users</span>
             <table
-                class="table table-white bg-white shadow-sm rounded">
-                <thead>
+                class="table   ">
+                <thead class="table-light">
                     <tr>
                         <th scope="col"> #</th>
                         <th scope="col"> Avatar</th>
