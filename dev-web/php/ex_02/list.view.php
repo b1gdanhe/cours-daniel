@@ -9,14 +9,13 @@
     <style>
         td {
             vertical-align: middle;
-
         }
     </style>
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg bg-white  shadow-sm" style="padding: ;">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-white  shadow-sm sticky-top">
+        <div class="container">
             <a class="navbar-brand" href="#">BigDE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,8 +53,8 @@
         </div>
     </nav>
     <div
-        class="table-responsive w-100  mt-5  px-5">
-        <form class="w-full  bg-white mb-2 p-2 rounded-1 shadow-sm" action="" method="post">
+        class="table-responsive w-75  mt-4 container">
+        <form class="w-full  bg-white mb-2 p-3 rounded-1 shadow-sm" action="" method="post">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
@@ -91,58 +90,61 @@
 
             </div>
         </form>
-
-        <table
-            class="table table-white table-striped bg-white shadow-sm rounded">
-            <thead>
-                <tr>
-                    <th scope="col"> #</th>
-                    <th scope="col"> Avatar</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Diplôme</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (count($users) === 0): ?>
+        <div>
+            <span>Users</span>
+            <table
+                class="table table-white bg-white shadow-sm rounded">
+                <thead>
                     <tr>
-                        <td colspan="6" class="text-center">
-                            Pas de données trouvées
-                        </td>
-
+                        <th scope="col"> #</th>
+                        <th scope="col"> Avatar</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Diplôme</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Action</th>
                     </tr>
-
-                <?php else: ?>
-                    <?php foreach ($users as $key => $user):
-                    ?>
-
-                        <tr class="">
-                            <td scope="row"><?= $user['id'] ?></td>
-                            <td scope="row"><img src="<?= substr($user['profile_image_url'], 1)  ?>" alt="Image" width="70" height="70" style="object-fit:cover"></td>
-                            <td scope="row"><?= $user['last_name'] ?></td>
-                            <td scope="row"><?= $user['first_name'] ?></td>
-                            <td scope="row"><?= $user['degree'] ?></td>
-                            <td scope="row"><?= $user['age'] ?></td>
-                            <td scope="row">
-                                <div>
-                                    <a class="btn btn-primary" href="./detail.php?id=<?= $user['id'] ?>">
-                                        Details
-                                    </a>
-                                    <a class="btn btn-warning" href="./edit.php?id=<?= $user['id'] ?>&first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>&profile_image_url=<?= $user['profile_image_url'] ?>">
-                                        Modifier
-                                    </a>
-
-                                </div>
+                </thead>
+                <tbody>
+                    <?php if (count($users) === 0): ?>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                Pas de données trouvées
                             </td>
 
                         </tr>
-                    <?php endforeach ?>
-                <?php endif ?>
 
-            </tbody>
-        </table>
+                    <?php else: ?>
+                        <?php foreach ($users as $key => $user):
+                        ?>
+
+                            <tr class="">
+                                <td scope="row"><?= $user['id'] ?></td>
+                                <td scope="row"><img src="<?= substr($user['profile_image_url'], 1)  ?>" alt="Image" width="70" height="70" style="object-fit:cover"></td>
+                                <td scope="row"><?= $user['last_name'] ?></td>
+                                <td scope="row"><?= $user['first_name'] ?></td>
+                                <td scope="row"><?= $user['degree'] ?></td>
+                                <td scope="row"><?= $user['age'] ?></td>
+                                <td scope="row">
+                                    <div>
+                                        <a class="btn btn-primary" href="./detail.php?id=<?= $user['id'] ?>">
+                                            Details
+                                        </a>
+                                        <a class="btn btn-warning" href="./edit.php?id=<?= $user['id'] ?>&first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>&profile_image_url=<?= $user['profile_image_url'] ?>">
+                                            Modifier
+                                        </a>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+                        <?php endforeach ?>
+                    <?php endif ?>
+
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 </body>
