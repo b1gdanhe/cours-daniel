@@ -117,7 +117,7 @@
                         <input
                             name="my-form-button"
                             type="submit"
-                            value="Valider"
+                            value="Modifier"
                             id=""
                             class="btn btn-primary w-25"
                             href="#"

@@ -9,7 +9,7 @@
 </head>
 
 <body class="d-flex justify-content-center pt-5">
-    
+
     <?php if ($displayInfo): ?>
         <div
             class="table-responsive w-75">
@@ -38,10 +38,10 @@
                             <td scope="row"><?= $user['age'] ?></td>
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="./detail.php?id=<?= $user['id']?>&amp;first_name=<?= $user['first_name']?>&last_name=<?= $user['last_name']?>&degree=<?= $user['degree']?>&age=<?= $user['age']?>&description=<?= $user['description']?>">
+                                    <a class="btn btn-primary" href="./detail.php?id=<?= $user['id'] ?>&amp;first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning"  href="./edit.php?id=<?= $user['id']?>&first_name=<?= $user['first_name']?>&last_name=<?= $user['last_name']?>&degree=<?= $user['degree']?>&age=<?= $user['age']?>&description=<?= $user['description']?>">
+                                    <a class="btn btn-warning" href="./edit.php?id=<?= $user['id'] ?>&first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>">
                                         Modifier
                                     </a>
 
@@ -77,7 +77,7 @@
                 </ul>
             <?php endif ?>
             <div class="w-75 bg-white p-3 border ">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -121,6 +121,14 @@
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="row">
+                        <div class="form-group">
+                            <label for="date" class="form-label"> Téléverser le diplôme</label>
+                            <input class="form-control" id="number" type="file" name="degree_file" >
+                        </div>
+                    </div>
+
                     <div class="row d-flex justify-content-center mt-3">
                         <input
                             name="my-form-button"
