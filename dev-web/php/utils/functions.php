@@ -5,7 +5,7 @@ const ALLOW_FILE_TYPES = ['application/pdf', 'image/png', 'image/jpg', 'image/jp
 
 function dd($value)
 {
-    echo '<pre  style="background-color: black; color: lightgreen; padding: 10px"> ';
+    echo '<pre  style="background-color: black; color: lightgreen; padding: 10px; "> ';
     var_dump($value);
     echo '</pre>';
     die();

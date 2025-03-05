@@ -1,6 +1,5 @@
 <?php
 
-require '../utils/functions.php';
 $post_data = $_POST;
 $server = $_SERVER;
 
@@ -21,4 +20,4 @@ function selectedDegree($currentDegree, $degree)
     return $degree ===  $currentDegree;
 }
 
-require 'edit.view.php';
+require 'views/edit.view.php';

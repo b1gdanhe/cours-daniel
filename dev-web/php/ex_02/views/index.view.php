@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="../public/css/">
 </head>
 
-<body class="d-flex justify-content-center pt-5 bg-light">
-    <div class="d-flex flex-column w-75 align-items-center jsutify-content-center ">
+<body class="bg-light">
+    <?php  include_once('partials/navbar.php'); ?>
+    <div class="d-flex flex-column w-100 align-items-center jsutify-content-center ">
         <?php if (count($errors) > 0): ?>
             <ul style="list-style: none;" class="text-danger">
                 <?php foreach ($errors as $key => $value):
@@ -21,7 +22,7 @@
                 <?php endforeach ?>
             </ul>
         <?php endif ?>
-        <div class="w-75 bg-white p-4 border shadow-sm rounded">
+        <div class="w-50 bg-white mt-4 p-4 border shadow-sm rounded">
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-6">

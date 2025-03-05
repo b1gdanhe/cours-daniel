@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
 </head>
 
-<body class="d-flex justify-content-center pt-5 bg-light">
+<body class=" bg-light">
+    <?php include_once('partials/navbar.php'); ?>
 
 
-    <div class="d-flex flex-column  w-75 align-items-center jsutify-content-center">
+    <div class="d-flex flex-column  w-100 align-items-center jsutify-content-center mt-4">
         <?php if (count($errors) > 0): ?>
             <ul style="list-style: none;">
                 <?php foreach ($errors as $key => $value):
@@ -22,7 +23,7 @@
                 <?php endforeach ?>
             </ul>
         <?php endif ?>
-        <div class="w-75 bg-white p-3 border   rounded shadow-sm">
+        <div class="w-50 bg-white p-3 border   rounded shadow-sm">
             <form action="" method="post">
                 <div class="row">
                     <div class="col-6">
