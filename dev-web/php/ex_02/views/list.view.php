@@ -119,7 +119,7 @@
                                     <a class="btn btn-primary" href="./detail?id=<?= $user['id'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="edit?id=<?= $user['id'] ?>&first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>&profile_image_url=<?= $user['profile_image_url'] ?>">
+                                    <a class="btn btn-warning" href="edit?id=<?= $user['id'] ?>">
                                         Modifier
                                     </a>
                                     <a class="btn btn-danger" href="./edit.php?id=<?= $user['id'] ?>&first_name=<?= $user['first_name'] ?>&last_name=<?= $user['last_name'] ?>&degree=<?= $user['degree'] ?>&age=<?= $user['age'] ?>&description=<?= $user['description'] ?>&profile_image_url=<?= $user['profile_image_url'] ?>">

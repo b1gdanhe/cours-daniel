@@ -11,7 +11,10 @@
 <body class=" bg-light">
     <?php include_once('partials/navbar.php'); ?>
 
+    <?php if (!$user): ?>
+        <div class="text-center mt-3 fs-4"> Resource not found</div>
 
+    <?php else: ?>
     <div class="d-flex flex-column  w-100 align-items-center jsutify-content-center mt-4">
         <?php if (count($errors) > 0): ?>
             <ul style="list-style: none;">
@@ -101,6 +104,8 @@
             </form>
         </div>
     </div>
+    <?php endif  ?>
+
 </body>
 
 </html>

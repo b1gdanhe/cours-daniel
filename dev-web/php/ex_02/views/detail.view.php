@@ -25,8 +25,8 @@
             </div>
 
         <?php else:  ?>
-            <div> Resource non trouvé</div>
-        <?php endif  ?>
+            <div class="text-center mt-3 fs-4"> Resource not found</div>
+            <?php endif  ?>
     </div>
 
 
