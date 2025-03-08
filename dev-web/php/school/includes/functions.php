@@ -41,3 +41,4 @@ function storeFile($currentLocation, $destination = '')
 {
     return move_uploaded_file(from: $currentLocation, to: $destination);
 }
+

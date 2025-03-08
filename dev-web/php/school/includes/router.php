@@ -17,3 +17,9 @@ if (array_key_exists($uri, $routes)) {
 } else {
     require 'controllers/404.php';
 }
+
+
+function isCurrentUrl($currentUrl, $menuUrl)
+{
+    return $currentUrl === $menuUrl;
+}
