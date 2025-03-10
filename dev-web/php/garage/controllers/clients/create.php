@@ -13,6 +13,7 @@ if ($server['REQUEST_METHOD'] == "POST") {
     if (!isset($post_data['my-create-client-form']) || $post_data['my-create-client-form'] !== SUBMIT_VALUE) {
         $erros[] = 'Veuillez soumettre de forlumaire';
     } else {
+        validateData($_POST, []);
         if ($last_name = validate($post_data['last_name'])) {
             if ($first_name = validate($post_data['first_name'])) {
                 if ($email = validate($post_data['email'])) {

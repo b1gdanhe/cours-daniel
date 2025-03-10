@@ -3,12 +3,12 @@
 const DB_SYSTEM = "mysql";
 const DB_CONFIG = [
     'host' => 'localhost',
-    'dbname' => 'garage',
+    'dbname' => 'garage_mg',
     // 'port' => '3306',
 ];
 
 
-function connectToDb($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $username = 'big', string $password = 'Big@big1')
+function connectToDb($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $username = 'root', string $password = 'Big@big1')
 {
     $db_config_format =  http_build_query($config, "", ";");
     $dns = "$db_system:$db_config_format";

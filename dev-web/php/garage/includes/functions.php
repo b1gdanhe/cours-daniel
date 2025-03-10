@@ -11,6 +11,31 @@ function dd($value)
     die();
 }
 
+function validateData(array $reauestDatas, array $rules)
+{
+    $errors = [];
+    $datas = $reauestDatas;
+
+    foreach ($rules as $name => $rule) {
+        $value = $datas[$name];
+        dd($rule);
+        // if (!$$rules[$name]($value)) {
+        //     return false;
+        // } else {
+        //     $valueCleaned = htmlspecialchars(strip_tags(trim($value)));
+        //     return empty($valueCleaned) ? false : $valueCleaned;
+        // }
+    }
+    return [
+        'hasError' =>  count($errors) > 0,
+        'datas' =>  count($errors) > 0,
+    ];
+}
+function string(string $value)
+{
+    strlen($value) !== 0;
+}
+
 function validate($value)
 {
     if (!isset($value)) {
@@ -41,4 +66,3 @@ function storeFile($currentLocation, $destination = '')
 {
     return move_uploaded_file(from: $currentLocation, to: $destination);
 }
-
