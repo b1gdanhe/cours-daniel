@@ -70,7 +70,7 @@
                             <input class="form-control" id="number" type="number" name="age" value="<?= $age ?>">
                         </div>
                     </div>
-                    <div
+                    <!-- <div
                         class="row">
                         <div class="form-group">
                             <label for="date" class="form-label"> Téléverser le diplôme</label>
@@ -89,7 +89,7 @@
                                 <img src="<?= substr($profile_image_url, 1)  ?>" alt="Image" width="70" height="70" style="object-fit:cover">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row d-flex justify-content-center mt-3">
                         <input
                             name="my-form-button"

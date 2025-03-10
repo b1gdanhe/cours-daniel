@@ -6,7 +6,10 @@ $users = [];
 $server = $_SERVER;
 $post_data = $_POST;
 if ($server['REQUEST_METHOD'] === 'POST') {
-    if (!isset($post_data['my-clearSearch-button']) || $post_data['my-clearSearch-button'] != 'Clear') {
+
+    if (isset($post_data['my-search-button']) && $post_data['my-search-button'] === 'Filter') {
+  //      dd([$params, $query]);
+
         $query = "SELECT * FROM users ";
         $params = [];
         if ($search_key = validate($post_data['search_key'])) {
@@ -17,9 +20,16 @@ if ($server['REQUEST_METHOD'] === 'POST') {
             $query .= (str_contains($query, 'WHERE') ? "AND" : "WHERE") . " last_name LIKE :name_search_key";
             $params['name_search_key'] = '%' . $name_search_key . '%';
         }
-        //   dd([$params, $query]);
         $users = getList($db, $query, $params);
-    } else {
+    } else if (isset($post_data['my-btn-delete']) && $post_data['my-btn-delete'] === 'Delete') {
+        try {
+            $query = "DELETE FROM users WHERE id = :id";
+            $new_city = storeNew($db, $query, ['id' => $post_data['id']]);
+            header("Location: /list");
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    } else if (isset($post_data['my-clearSearch-button']) && $post_data['my-clearSearch-button'] === 'Clear') {
         $query = 'SELECT * FROM users';
         $users = getList($db, $query);
     }

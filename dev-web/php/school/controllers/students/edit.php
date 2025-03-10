@@ -20,13 +20,15 @@ if ($server['REQUEST_METHOD'] == "POST") {
         if ($last_name = validate($post_data['last_name'])) {
             if ($first_name = validate($post_data['first_name'])) {
                 if ($email = validate($post_data['email'])) {
-                    if ($filier = validate($post_data['filier']) && existInTable('filiers', 'id', $post_data['filier'])) {
-                        if ($photo = validateFile($file_data['photo'])) {
-                            $destination = './public/uploads/' . $photo['name'];
-                            try {
-                                storeFile($photo['tmp_name'], $destination);
-                            } catch (\Throwable $th) {
-                                dd($th->getMessage());
+                    if (($filier = validate($post_data['filier'])) && existInTable('filiers', 'id', $post_data['filier'])) {
+                        if (($photo = validateFile($file_data['photo'])) || $student['photo'] != null) {
+                            $destination =  $photo  == false ? $student['photo'] : './public/uploads/' . $photo['name'] ;
+                            if ($photo) {
+                                try {
+                                    storeFile($photo['tmp_name'], $destination);
+                                } catch (\Throwable $th) {
+                                    dd($th->getMessage());
+                                }
                             }
 
                             $user_data = [
@@ -34,9 +36,10 @@ if ($server['REQUEST_METHOD'] == "POST") {
                                 'first_name' => $first_name,
                                 'email' => $email,
                                 'filier_id' => $filier,
-                                'photo' => $destination,
+                                'photo' => $destination ?? $student['photo'],
                                 'matricule' => $get_data['matricule'],
                             ];
+                            //  dd($user_data);
                             try {
                                 $query = "UPDATE students SET last_name = :last_name, first_name = :first_name, email = :email, filier_id = :filier_id, photo = :photo WHERE matricule = :matricule";
                                 $updated_user = storeNew($db, $query, $user_data);

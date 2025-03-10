@@ -47,7 +47,7 @@ if (!isset($post_data['my-form-button']) ||  $post_data['my-form-button'] != SUB
                                 try {
                                     $query = "INSERT INTO users (last_name, first_name, description, degree, age, degree_file, profile_image_url) VALUES (:last_name, :first_name, :description, :degree, :age, :degree_file, :profile_image_url)";
                                     $new_city = storeNew($db, $query, $user_data);
-                                    header("Location: ./list.php");
+                                    header("Location: /list");
                                 } catch (\Throwable $th) {
                                     dd($th->getMessage());
                                 }

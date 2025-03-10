@@ -10,7 +10,8 @@ $params = [];
 
 if ($server['REQUEST_METHOD'] === 'POST') {
 
-    if (isset($post_data['my-delete-student-form']) && $post_data['my-delete-student-form'] !== 'Delete Student') {
+    if (isset($post_data['my-delete-student-form']) && $post_data['my-delete-student-form'] === 'Delete Student') {
+        
         try {
             $deleteStudentQuery = "DELETE FROM students WHERE matricule = :matricule";
             storeNew($db, $deleteStudentQuery, ['matricule' => $post_data['matricule']]);

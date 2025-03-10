@@ -17,13 +17,12 @@
 
 <body class="bg-light">
     <?php
-    include_once('partials/navbar.php');
+    include_once('pages/partials/navbar.php');
     ?>
     <div
-        class="table-responsive w-75 mt-4 container p-4 bg-white shadow-sm">
+        class="table-responsive w-100 mt-4 container p-4 bg-white shadow-sm">
         <div class="w-100 d-flex justify-content-between align-items-center mb-4">
-            <div>Users</div>
-            <form class="w-75 d-flex justify-content-end" action="" method="post">
+            <form class="w-100 d-flex justify-content-start" action="" method="post">
                 <div class="d-flex gap-2">
                     <div class="">
                     </div>
@@ -32,11 +31,7 @@
                             <input class="form-control" id="name" type="text" value="<?= $search_key ?? '' ?>" name="search_key" placeholder="Search">
                         </div>
                     </div>
-                    <div class="">
-                        <div class="form-group">
-                            <input class="form-control" id="name" type="text" value="<?= $name_search_key ?? '' ?>" name="name_search_key" placeholder="Search by name">
-                        </div>
-                    </div>
+
                     <div class="d-flex align-items-center ">
                         <label for="my-search-button" class="" style="">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" style=" width: 20px;" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -77,7 +72,7 @@
                 name=""
                 id=""
                 class="btn btn-dark"
-                href="/"
+                href="/cars/create"
                 role="button">Add</a>
 
         </div>
@@ -86,16 +81,17 @@
             <thead class="table-light">
                 <tr>
                     <th scope="col"> #</th>
-                    <th scope="col"> Avatar</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Diplôme</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"> Matricule</th>
+                    <th scope="col">Modèle(Marque)</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Garage</th>
+                    <th scope="col">Date de sortie</th>
+                    <th scope="col">Date de d'entrée</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (count($users) === 0): ?>
+                <?php if (count($cars) === 0): ?>
                     <tr>
                         <td colspan="6" class="text-center">
                             Pas de données trouvées
@@ -104,30 +100,37 @@
                     </tr>
 
                 <?php else: ?>
-                    <?php foreach ($users as $key => $user):
+                    <?php foreach ($cars as $key => $car):
                     ?>
 
                         <tr class="">
-                            <td scope="row"><?= $user['id'] ?></td>
-                            <td scope="row"><img src="<?= substr($user['profile_image_url'], 1)  ?>" alt="Image" width="70" height="70" style="object-fit:cover"></td>
-                            <td scope="row"><?= $user['last_name'] ?></td>
-                            <td scope="row"><?= $user['first_name'] ?></td>
-                            <td scope="row"><?= $user['degree'] ?></td>
-                            <td scope="row"><?= $user['age'] ?></td>
+                            <td scope="row"><?= $car['id'] ?></td>
+                            <td scope="row"><?= $car['matricule'] ?></td>
+                            <td scope="row"><?= $car['model'] ?> (<?= $car['mark'] ?>)</td>
+                            <td scope="row"><?= $car['last_name'] . ' ' . $car['first_name'] ?></td>
+                            <td scope="row"><?= $car['name'] ?></td>
+                            <td scope="row"><?= $car['enter_date'] ?></td>
+                            <td scope="row"><?= $car['out_date'] ?></td>
+                            <!-- <td scope="row">
+                                <span
+                                    class="badge rounded-pill text-bg-info"><?= $car['out'] ?></span>
+                            </td> -->
+
+
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="./detail?id=<?= $user['id'] ?>">
+                                    <a class="btn btn-primary" href="cars/show?id=<?= $car['id'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="edit?id=<?= $user['id'] ?>">
+                                    <a class="btn btn-warning" href="cars/edit?matricule=<?= $car['matricule'] ?>">
                                         Modifier
                                     </a>
                                     <form action="" method="post" style="display: inline;">
-                                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                        <input type="hidden" name="matricule" value="<?= $car['matricule'] ?>">
                                         <input class="btn btn-danger"
                                             type="submit"
-                                            name="my-btn-delete"
-                                            value="Delete" />
+                                            name="my-delete-car-form"
+                                            value="Delete car" />
                                     </form>
 
 
