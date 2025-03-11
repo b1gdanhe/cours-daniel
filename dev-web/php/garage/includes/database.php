@@ -3,12 +3,12 @@
 const DB_SYSTEM = "mysql";
 const DB_CONFIG = [
     'host' => 'localhost',
-    'dbname' => 'garage_mg',
+    'dbname' => 'garage',
     // 'port' => '3306',
 ];
 
 
-function connectToDb($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $username = 'root', string $password = 'Big@big1')
+function connectToDb($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $username = 'big', string $password = 'Big@big1')
 {
     $db_config_format =  http_build_query($config, "", ";");
     $dns = "$db_system:$db_config_format";
@@ -18,15 +18,20 @@ function connectToDb($db_system = DB_SYSTEM, array $config = DB_CONFIG, string $
     ]);
 }
 
-function getAll($bdConnection, $query, array $params = [])
+$db  = $connectToDb();
+
+function all($query, array $params = [])
 {
-    $statment = $bdConnection->prepare($query);
+    global $db;
+    $statment = $db->prepare($query);
     $statment->execute($params);
     return $statment->fetchAll();
 }
-function getOne($bdConnection, $query, array $params = [])
+
+function one($query, array $params = [])
 {
-    $statment = $bdConnection->prepare($query);
+    global $db;
+    $statment = $db->prepare($query);
     $statment->execute($params);
     dd($statment->fetch());
     return $statment->fetch();
@@ -34,6 +39,7 @@ function getOne($bdConnection, $query, array $params = [])
 
 function storeNew($bdConnection, $query, array $params = [])
 {
-    $statment = $bdConnection->prepare($query);
+    global $db;
+    $statment = $db->prepare($query);
     return $statment->execute($params);
 }

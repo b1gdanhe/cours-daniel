@@ -1,7 +1,6 @@
 <?php
 
 const SUBMIT_VALUE = 'Mettre à jour';
-$db = connectToDB();
 $errors = [];
 
 $post_data = $_POST;
@@ -15,7 +14,7 @@ $client = null;
 
 try {
     $getCurrentClientQuery = "SELECT * FROM  clients WHERE id = :id";
-    $client = getOne($db, $getCurrentClientQuery, ['id' => $id]);
+    $client = one( $getCurrentClientQuery, ['id' => $id]);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }

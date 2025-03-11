@@ -1,6 +1,5 @@
 <?php
 
-$db = connectToDb();
 $post_data = $_POST;
 $server = $_SERVER;
 
@@ -31,7 +30,7 @@ if ($server['REQUEST_METHOD'] === 'POST') {
 }
 
 try {
-    $garages = getAll($db, $getgaragequery, $params);
+    $garages = all( $getgaragequery, $params);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }

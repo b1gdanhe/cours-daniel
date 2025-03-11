@@ -1,7 +1,6 @@
 <?php
 
 const SUBMIT_VALUE = 'Enregistrer';
-$db = connectToDB();
 $garages = [];
 $clients = [];
 $errors = [];
@@ -17,7 +16,7 @@ $file_data = $_FILES;
 try {
     $getCurrentCarQuery = "SELECT * FROM cars,clients,garages WHERE cars.id = :id AND cars.client_id = clients.id AND cars.garage_id = garages.id";
     // dd($getCurrentCarQuery);
-    $car = getOne($db, $getCurrentCarQuery, ['id' => $id]);
+    $car = one( $getCurrentCarQuery, ['id' => $id]);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }
@@ -78,10 +77,10 @@ if ($server['REQUEST_METHOD'] == "POST") {
 };
 
 $garageQuery = "SELECT * FROM garages";
-$garages  = getAll($db, $garageQuery);
+$garages  = all( $garageQuery);
 
 $clientQuery = "SELECT * FROM clients";
-$clients  = getAll($db, $clientQuery);
+$clients  = all( $clientQuery);
 //dd($clients);
 
 require 'pages/cars/edit.page.php';

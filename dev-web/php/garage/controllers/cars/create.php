@@ -1,7 +1,6 @@
 <?php
 
 const SUBMIT_VALUE = 'Enregistrer';
-$db = connectToDB();
 $garages = [];
 $clients = [];
 $errors = [];
@@ -64,10 +63,10 @@ if ($server['REQUEST_METHOD'] == "POST") {
 };
 
 $garageQuery = "SELECT * FROM garages";
-$garages  = getAll($db, $garageQuery);
+$garages  = all( $garageQuery);
 
 $clientQuery = "SELECT * FROM clients";
-$clients  = getAll($db, $clientQuery);
+$clients  = all( $clientQuery);
 //dd($clients);
 
 require 'pages/cars/create.page.php';

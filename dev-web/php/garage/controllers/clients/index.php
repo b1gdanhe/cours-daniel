@@ -1,6 +1,5 @@
 <?php
 
-$db = connectToDb();
 $post_data = $_POST;
 $server = $_SERVER;
 
@@ -31,7 +30,7 @@ if ($server['REQUEST_METHOD'] === 'POST') {
 }
 
 try {
-    $clients = getAll($db, $getClientquery, $params);
+    $clients = all( $getClientquery, $params);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }

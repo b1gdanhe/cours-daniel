@@ -1,68 +1,90 @@
 <?php
 
-const ALLOW_FILE_TYPES = ['application/pdf', 'image/png', 'image/jpg', 'image/jpeg'];
+const FILE_CONFIG = [
+    'pdf' => [
+        'mime' => ['application/pdf'],
+        'max_size' => 5242880, // 5 MB
+    ],
+    'image' => [
+        'mime' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/webp'],
+        'max_size' => 2097152, // 2 MB
+    ],
+];
 
 
-function dd($value)
+function dd($value, bool $die = true, string $color = 'lightgreen'): void
 {
-    echo '<pre  style="background-color: black; color: lightgreen; padding: 10px; "> ';
+    echo sprintf(
+        '<pre style="background-color: black; color: %s; padding: 10px; border-radius: 5px; overflow: auto; max-height: 80vh;">',
+        htmlspecialchars($color)
+    );
     var_dump($value);
     echo '</pre>';
-    die();
+
+    if ($die) {
+        die();
+    }
 }
 
-function validateData(array $reauestDatas, array $rules)
-{
-    $errors = [];
-    $datas = $reauestDatas;
 
-    foreach ($rules as $name => $rule) {
-        $value = $datas[$name];
-        dd($rule);
-        // if (!$$rules[$name]($value)) {
-        //     return false;
-        // } else {
-        //     $valueCleaned = htmlspecialchars(strip_tags(trim($value)));
-        //     return empty($valueCleaned) ? false : $valueCleaned;
-        // }
+
+function formatBytes(int $bytes, int $precision = 2): string
+{
+    $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+
+    $bytes = max($bytes, 0);
+    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+    $pow = min($pow, count($units) - 1);
+
+    $bytes /= pow(1024, $pow);
+
+    return round($bytes, $precision) . ' ' . $units[$pow];
+}
+
+function storeFile(array $file, string $destination, bool $createDirs = true, $allowedTypes = ['pdf', 'image']): array
+{
+   
+    $directory = dirname($destination);
+
+    if ($createDirs && !is_dir($directory)) {
+        if (!mkdir($directory, 0755, true)) {
+            return [
+                'success' => false,
+                'message' => "Impossible de créer le répertoire: $directory",
+                'file_path' => null
+            ];
+        }
     }
+
+    if (!is_writable($directory)) {
+        return [
+            'success' => false,
+            'message' => "Le répertoire n'est pas accessible en écriture: $directory",
+            'file_path' => null
+        ];
+    }
+
+    if (!move_uploaded_file($file['tmp_name'], $destination)) {
+        return [
+            'success' => false,
+            'message' => "Échec lors du déplacement du fichier vers: $destination",
+            'file_path' => null
+        ];
+    }
+
     return [
-        'hasError' =>  count($errors) > 0,
-        'datas' =>  count($errors) > 0,
+        'success' => true,
+        'message' => 'Fichier enregistré avec succès',
+        'file_path' => $destination
     ];
 }
-function string(string $value)
-{
-    strlen($value) !== 0;
-}
 
-function validate($value)
-{
-    if (!isset($value)) {
-        return false;
-    } else {
-        $valueCleaned = htmlspecialchars(strip_tags(trim($value)));
-        return empty($valueCleaned) ? false : $valueCleaned;
-    }
-}
-function existInTable($table, $column, $value)
-{
-    $query = "SELECT $column FROM $table WHERE $column = :value";
-    $params =  ['value' => $value];
-    $db = connectToDB();
-    $result  = getOne($db, $query, $params);
-    return $result != false;
-}
 
-function validateFile($file)
+function generateSecureFileName(string $originalName, string $prefix = ''): string
 {
-    if ($file['error'] || !in_array($file['type'], ALLOW_FILE_TYPES)) {
-        return false;
-    }
-    return $file;
-}
+    $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+    $uniqueId = time() . '_' . bin2hex(random_bytes(8));
+    $fileName = $prefix ? "{$prefix}_{$uniqueId}.{$extension}" : "{$uniqueId}.{$extension}";
 
-function storeFile($currentLocation, $destination = '')
-{
-    return move_uploaded_file(from: $currentLocation, to: $destination);
+    return $fileName;
 }

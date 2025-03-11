@@ -1,7 +1,6 @@
 <?php
 
 const SUBMIT_VALUE = 'Mettre à jour';
-$db = connectToDB();
 $errors = [];
 
 $post_data = $_POST;
@@ -15,7 +14,7 @@ $car = null;
 
 try {
     $getCurrentCarQuery = "SELECT * FROM  cars WHERE id = :id";
-    $car = getOne($db, $getCurrentCarQuery, ['id' => $id]);
+    $car = one( $getCurrentCarQuery, ['id' => $id]);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }

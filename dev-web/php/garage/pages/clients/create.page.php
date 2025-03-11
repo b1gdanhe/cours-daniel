@@ -55,7 +55,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="email" class="form-label"> Email</label>
-                            <input class="form-control" id="email" type="email" name="email">
+                            <input class="form-control" id="email" type="text" name="email">
                         </div>
                     </div>
                 </div>

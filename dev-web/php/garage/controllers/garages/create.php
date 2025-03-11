@@ -1,7 +1,6 @@
 <?php
 
 const SUBMIT_VALUE = 'Enregistrer';
-$db = connectToDB();
 $filiers = [];
 $errors = [];
 
