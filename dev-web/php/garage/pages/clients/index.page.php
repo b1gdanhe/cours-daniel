@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="public/css/font-awesome.min.css">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-
-    <style>
-        td {
-            vertical-align: middle;
-        }
-    </style>
-</head>
+<?php page('partials/head.php'); ?>
 
 <body class="bg-light">
-    <?php
-    include_once('pages/partials/navbar.php');
-    ?>
+    <?php page("partials/navbar.php"); ?>
     <div
         class="table-responsive w-75 mt-4 container p-4 bg-white shadow-sm">
         <div class="w-100 d-flex justify-content-between align-items-center mb-4">

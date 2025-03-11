@@ -1,2 +1,2 @@
 <?php
-require 'pages/404.page.php';
+page("404.page.php");

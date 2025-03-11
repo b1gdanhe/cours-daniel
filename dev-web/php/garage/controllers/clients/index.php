@@ -10,7 +10,6 @@ $params = [];
 if ($server['REQUEST_METHOD'] === 'POST') {
 
     if (isset($post_data['my-delete-client-form']) && $post_data['my-delete-client-form'] === 'Delete client') {
-
         try {
             $deleteclientQuery = "DELETE FROM clients WHERE id = :id";
             storeNew($db, $deleteclientQuery, ['id' => $post_data['id']]);
@@ -30,10 +29,12 @@ if ($server['REQUEST_METHOD'] === 'POST') {
 }
 
 try {
-    $clients = all( $getClientquery, $params);
+    $clients = all($getClientquery, $params);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }
 
 
-require 'pages/clients/index.page.php';
+page("clients/index.page.php", [
+    'clients' => $clients
+]);

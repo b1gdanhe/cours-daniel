@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/">
-</head>
+<?php page('partials/head.php'); ?>
 
 <body class="bg-light">
-    <?php include_once('pages/partials/navbar.php'); ?>
-    <div class="d-flex flex-column w-100 align-items-center jsutify-content-center mt-4">
+    <?php page("partials/navbar.php"); ?>
+    <div
+        <div class="d-flex flex-column w-100 align-items-center jsutify-content-center mt-4">
         <div class="fs-3 text-center w-100">
             Modifier client
         </div>
@@ -73,15 +65,11 @@
                             role="button">
                     </div>
                     <div class="col-6 ">
-                        <input
-                            name="my-create-client-form"
-                            type="submit"
-
-                            value="Annuler"
+                        <a
                             id=""
                             class="btn btn-secondary w-50"
-                            href="#"
-                            role="button">
+                            href="/"
+                            role="button">Annuler</a>
                     </div>
 
                 </div>

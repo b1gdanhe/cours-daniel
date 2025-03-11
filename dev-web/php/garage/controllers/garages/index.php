@@ -36,4 +36,4 @@ try {
 }
 
 
-require 'pages/garages/index.page.php';
+page("garages/index.page.php");

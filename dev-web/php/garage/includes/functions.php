@@ -11,39 +11,43 @@ const FILE_CONFIG = [
     ],
 ];
 
-
 function dd($value, bool $die = true, string $color = 'lightgreen'): void
 {
+    ob_start(); // Démarre la mise en mémoire tampon de sortie
+    var_export($value); // Génère une représentation de code PHP
+    $output = ob_get_clean(); // Récupère et nettoie la sortie mise en mémoire tampon
+
+    $highlighted = highlight_string("<?php " . $output . ";", true); // Colore la sortie
+
+    // Supprime les balises <?php et ; ajoutées par highlight_string
+    $highlighted = str_replace('&lt;?php&nbsp;', '', $highlighted);
+    $highlighted = str_replace(';</code></pre>', '</code></pre>', $highlighted);
+    $highlighted = str_replace('#007700', htmlspecialchars($color), $highlighted);
+    $highlighted = str_replace('#DD0000', "#db4747", $highlighted);
+    $highlighted = str_replace('#0000BB', "#8c8cf8", $highlighted);
     echo sprintf(
-        '<pre style="background-color: black; color: %s; padding: 10px; border-radius: 5px; overflow: auto; max-height: 80vh;">',
-        htmlspecialchars($color)
+        '<pre style="background-color:rgb(0, 0, 0); color: %s; padding: 7px; border-radius: 5px; overflow: auto; max-height: 80vh; box-shadow: 1px 1px 5px  grey ">%s</pre>',
+        htmlspecialchars($color),
+        $highlighted
     );
-    var_dump($value);
-    echo '</pre>';
 
     if ($die) {
         die();
     }
 }
 
-
-
 function formatBytes(int $bytes, int $precision = 2): string
 {
     $units = ['B', 'KB', 'MB', 'GB', 'TB'];
-
     $bytes = max($bytes, 0);
     $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
     $pow = min($pow, count($units) - 1);
-
     $bytes /= pow(1024, $pow);
-
     return round($bytes, $precision) . ' ' . $units[$pow];
 }
 
 function storeFile(array $file, string $destination, bool $createDirs = true, $allowedTypes = ['pdf', 'image']): array
 {
-   
     $directory = dirname($destination);
 
     if ($createDirs && !is_dir($directory)) {
@@ -79,7 +83,6 @@ function storeFile(array $file, string $destination, bool $createDirs = true, $a
     ];
 }
 
-
 function generateSecureFileName(string $originalName, string $prefix = ''): string
 {
     $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
@@ -87,4 +90,20 @@ function generateSecureFileName(string $originalName, string $prefix = ''): stri
     $fileName = $prefix ? "{$prefix}_{$uniqueId}.{$extension}" : "{$uniqueId}.{$extension}";
 
     return $fileName;
+}
+
+function controller(string $path)
+{
+    return base_path("controllers/{$path}");
+}
+
+function page(string $path, array $datas = [])
+{
+    extract($datas);
+    require base_path("pages/{$path}");
+}
+
+function asset(string $path)
+{
+    return public_path("{$path}");
 }

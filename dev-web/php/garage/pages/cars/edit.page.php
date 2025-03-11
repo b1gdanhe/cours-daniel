@@ -105,15 +105,11 @@
                             role="button">
                     </div>
                     <div class="col-6 ">
-                        <input
-                            name="my-edit-car-form"
-                            type="submit"
-
-                            value="Annuler"
+                        <a
                             id=""
                             class="btn btn-secondary w-50"
-                            href="#"
-                            role="button">
+                            href="/cars"
+                            role="button"></a>
                     </div>
 
                 </div>

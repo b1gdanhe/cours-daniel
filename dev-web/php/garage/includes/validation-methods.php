@@ -1,6 +1,6 @@
 <?php
 
-$error_messages = include_once('includes/validation-messages.php');
+$error_messages =  require_once(BASE_PATH . 'includes/validation-messages.php');
 
 function string(string $name, $value, int $min = 1,  $max = INF): array
 {
@@ -50,7 +50,7 @@ function existInTable($table, $column, $value)
 {
     $query = "SELECT $column FROM $table WHERE $column = :value";
     $params =  ['value' => $value];
-    $result  = one( $query, $params);
+    $result  = one($query, $params);
     return $result != false;
 }
 
