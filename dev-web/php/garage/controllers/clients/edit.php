@@ -27,7 +27,6 @@ if ($server['REQUEST_METHOD'] == "POST") {
     if (!isset($post_data['my-create-client-form']) || $post_data['my-create-client-form'] !== SUBMIT_VALUE) {
         $errors[] = 'Veuillez soumettre de forlumaire';
     } else {
-
         $validateData = validateData($post_data, $rules);
         if ($validateData['hasError']) {
             $errors = $validateData['errors'];

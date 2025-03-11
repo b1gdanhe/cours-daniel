@@ -28,11 +28,16 @@ function connectToDb(
 
 $db  = connectToDb();
 
-function all($query, array $params = [])
+function all($table, array $params = [],  $search  = null)
 {
     global $db;
-    $statment = $db->prepare($query);
-    $statment->execute($params);
+    if ($search !== null) {
+        $statment = $db->prepare(search("SELECT * FROM {$table}"));
+        $statment->execute($params);
+    } else {
+        $statment = $db->prepare("SELECT * FROM {$table}");
+        $statment->execute();
+    }
     return $statment->fetchAll();
 }
 
@@ -42,6 +47,11 @@ function one(string $table, string $column, $value)
     $statment = $db->prepare("SELECT * FROM  {$table} WHERE {$column} = :{$column}");
     $statment->execute([$column => $value]);
     return $statment->fetch();
+}
+
+function search($previewAQuery): string
+{
+    return $previewAQuery;
 }
 
 function storeNew($query, array $params = [])
@@ -90,4 +100,11 @@ function update($table, $queryDatas, $searchColumn, $searchValue)
     $statment = $db->prepare("UPDATE {$table} SET {$setColumAndMark} WHERE $searchColumn = :{$searchColumn}");
 
     return $statment->execute($datas);
+}
+
+function delete(string $table, string $column, $value)
+{
+    global $db;
+    $statment = $db->prepare("DELETE FROM {$table} WHERE {$column} = :{$column}");
+    return $statment->execute([$column => $value]);
 }
