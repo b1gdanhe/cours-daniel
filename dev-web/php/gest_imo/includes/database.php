@@ -4,7 +4,7 @@
 const DB_SYSTEM = "mysql";
 const DB_CONFIG = [
     'host' => 'localhost',
-    'dbname' => 'garage_mg',
+    'dbname' => 'gest_immo',
     'port' => '3306',
     'username' => 'root',
     'password' => 'Big@big1'

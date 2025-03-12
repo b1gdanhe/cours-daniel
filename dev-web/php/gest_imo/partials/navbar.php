@@ -10,13 +10,16 @@ $currentPath =  parse_url($_SERVER['REQUEST_URI'])['path'];
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/') ? 'active' : '' ?>" aria-current="page" href="/">Clients</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/">Immeubles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/cars') ? 'active' : '' ?>" aria-current="page" href="/cars">Voitures</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/appartements') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/appartements">Appartements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/sarages') ? 'active' : '' ?>" aria-current="page" href="/garages">Garages</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/locataires') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/locataires">Locataires</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/propriétaires') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/propriétaires">Propriétaires</a>
                 </li>
 
             </ul>

@@ -5,10 +5,8 @@ $errors = [];
 
 
 $rules = [
-    'last_name' => 'string',
-    'first_name' => 'string',
-    'email' => 'email',
-    'phone' => 'string'
+    'name' => 'string',
+    'address' => 'string',
 ];
 
 $post_data = $_POST;
@@ -27,7 +25,7 @@ if ($server['REQUEST_METHOD'] == "POST") {
         if (!$validateData['hasError']) {
             $datas = $validateData['datas'];
             try {
-                $new_city = store("clients", $datas);
+                $new_city = store("immeubles", $datas);
                 header("Location: /");
             } catch (\Throwable $th) {
                 dd($th->getMessage());
@@ -36,7 +34,7 @@ if ($server['REQUEST_METHOD'] == "POST") {
     }
 };
 
-page("objects/create.page.php", [
+page("immeubles/create.page.php", [
     'errors' => $errors,
     "post_datas" => $post_data
 ]);

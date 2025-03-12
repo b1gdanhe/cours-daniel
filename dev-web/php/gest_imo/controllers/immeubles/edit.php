@@ -18,7 +18,7 @@ $rules = [
 ];
 
 try {
-    $client = one("clients", "id", $id);
+    $client = one("immeubles", "id", $id);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }
@@ -34,7 +34,7 @@ if ($server['REQUEST_METHOD'] == "POST") {
         if (!$validateData['hasError']) {
             $datas = $validateData['datas'];
             try {
-                $new_city = update("clients",  $datas, "id", $id);
+                $new_city = update("immeubles",  $datas, "id", $id);
                 header("Location: /");
             } catch (\Throwable $th) {
                 dd($th->getMessage());
@@ -44,7 +44,7 @@ if ($server['REQUEST_METHOD'] == "POST") {
 };
 
 
-page("objects/edit.page.php", [
+page("immeubles/edit.page.php", [
     'client' => $client,
     'errors' => $errors
 ]);

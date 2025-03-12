@@ -3,15 +3,13 @@
 $post_data = $_POST;
 $server = $_SERVER;
 
-$clients = [];
-$getClientquery = "SELECT * FROM clients";
+$immeubles = [];
 $params = [];
 
 if ($server['REQUEST_METHOD'] === 'POST') {
     if (isset($post_data['my-delete-client-form']) && $post_data['my-delete-client-form'] === 'Delete client') {
         try {
-            $deleteclientQuery = "DELETE FROM clients WHERE id = :id";
-            delete('clients', 'id',  $post_data['id']);
+            delete('immeubles', 'id',  $post_data['id']);
             header("Location: /");
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -26,12 +24,12 @@ if ($server['REQUEST_METHOD'] === 'POST') {
 }
 
 try {
-    $clients = all("clients", $params);
+    $immeubles = all("immeubles", $params);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }
 
 
-page("objects/index.page.php", [
-    'clients' => $clients
+page("immeubles/index.page.php", [
+    'immeubles' => $immeubles
 ]);

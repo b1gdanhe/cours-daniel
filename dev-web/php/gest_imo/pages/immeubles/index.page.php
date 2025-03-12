@@ -1,7 +1,7 @@
-<?php  partial('head.php'); ?>
+<?php partial('head.php'); ?>
 
 <body class="bg-light">
-    <?php  partial("navbar.php"); ?>
+    <?php partial("navbar.php"); ?>
     <div
         class="table-responsive w-75 mt-4 container p-4 bg-white shadow-sm">
         <div class="w-100 d-flex justify-content-between align-items-center mb-4">
@@ -55,7 +55,7 @@
                 name=""
                 id=""
                 class="btn btn-dark"
-                href="/clients/create"
+                href="/immeubles/create"
                 role="button">Add</a>
 
         </div>
@@ -65,14 +65,12 @@
                 <tr>
                     <th scope="col"> #</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Téléphone</th>
+                    <th scope="col">Adresse</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (count($clients) === 0): ?>
+                <?php if (count($immeubles) === 0): ?>
                     <tr>
                         <td colspan="6" class="text-center">
                             Pas de données trouvées
@@ -81,26 +79,21 @@
                     </tr>
 
                 <?php else: ?>
-                    <?php foreach ($clients as $key => $client):
+                    <?php foreach ($immeubles as $key => $client):
                     ?>
 
                         <tr class="">
                             <td scope="row"><?= $client['id'] ?></td>
-                            <td scope="row"><?= $client['last_name'] ?></td>
-                            <td scope="row"><?= $client['first_name'] ?></td>
-                            <td scope="row"><?= $client['email'] ?></td>
-                            <td scope="row">
-                                <span
-                                    class="badge rounded-pill text-bg-info"><?= $client['phone'] ?></span>
-                            </td>
+                            <td scope="row"><?= $client['name'] ?></td>
+                            <td scope="row"><?= $client['address'] ?></td>
 
 
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="clients/show?id=<?= $client['id'] ?>">
+                                    <a class="btn btn-primary" href="immeubles/show?id=<?= $client['id'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="clients/edit?id=<?= $client['id'] ?>">
+                                    <a class="btn btn-warning" href="immeubles/edit?id=<?= $client['id'] ?>">
                                         Modifier
                                     </a>
                                     <form action="" method="post" style="display: inline;">
