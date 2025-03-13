@@ -31,5 +31,5 @@ CREATE TABLE IF NOT EXISTS owners (
     FOREIGN KEY (appartement_id) REFERENCES appartements (id),
     person_id INT,
     FOREIGN KEY (person_id) REFERENCES persons (id),
-    quote_part VARCHAR(50) NOT NULL
+    quote_part DECIMAL(5, 2) NOT NULL
 );

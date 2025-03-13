@@ -16,7 +16,7 @@
                             <label for="name" class="form-label">Nom</label>
                             <input class="form-control" id="name" type="text" name="name" value="<?= $post_datas['name'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['last_name'] ?? "" ?>
+                                <?= $errors['name'] ?? "" ?>
                             </div>
                         </div>
                     </div>
@@ -34,9 +34,9 @@
                 <div class="row  mt-3 w-100">
                     <div class="col-3 ">
                         <input
-                            name="my-create-client-form"
+                            name="<?= $form_name ?>"
                             type="submit"
-                            value="Enregistrer"
+                            value="<?= $form_value ?>"
                             id=""
                             class="btn btn-primary w-100"
                             href="#"

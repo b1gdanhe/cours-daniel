@@ -28,12 +28,14 @@ function connectToDb(
 
 $db  = connectToDb();
 
-function all($table, array $params = [],  $search  = null)
+function all($table, array $params = [],  $searchValue  = null, array $searchColumns = [])
 {
     global $db;
-    if ($search !== null) {
-        $statment = $db->prepare(search("SELECT * FROM {$table}"));
+    if ($searchValue !== null) {
+        $statment = $db->prepare(search("SELECT * FROM {$table}", $searchValue, $searchColumns));
+        $params = array_merge($params, ['searchValue' => "%" . $searchValue . "%"]);
         $statment->execute($params);
+        
     } else {
         $statment = $db->prepare("SELECT * FROM {$table}");
         $statment->execute();
@@ -49,9 +51,18 @@ function one(string $table, string $column, $value)
     return $statment->fetch();
 }
 
-function search($previewAQuery): string
+function search(string $previewAQuery, string $searchValue, array $searchColumns): string
 {
-    return $previewAQuery;
+    $previewAQuery .=  (str_contains($previewAQuery, 'WHERE') ? " AND " : " WHERE ");
+    return $previewAQuery . formatBaseSearchRequest($searchColumns);
+}
+
+function formatBaseSearchRequest(array $searchColumns): string
+{
+    $searchColumns =  array_map(function ($column) {
+        return $column . " LIKE :searchValue";
+    }, $searchColumns);
+    return implode(" OR ", $searchColumns);
 }
 
 function storeNew($query, array $params = [])

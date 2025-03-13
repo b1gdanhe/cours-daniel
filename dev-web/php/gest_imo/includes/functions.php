@@ -11,7 +11,7 @@ const FILE_CONFIG = [
     ],
 ];
 
-function dd($value, bool $die = true, string $color = 'lightgreen'): void
+function dd( $value, bool $die = true, string $color = 'lightgreen'): void
 {
     ob_start(); // Démarre la mise en mémoire tampon de sortie
     var_export($value); // Génère une représentation de code PHP

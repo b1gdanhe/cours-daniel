@@ -16,23 +16,23 @@
                     </div>
 
                     <div class="d-flex align-items-center ">
-                        <label for="my-search-button" class="" style="">
+                        <label for="<?= $search_form_name ?>" class="" style="">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" style=" width: 20px;" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                             </svg>
                         </label>
                         <input
                             style="display:none"
-                            name="my-search-button"
+                            name="<?= $search_form_name ?>"
                             type="submit"
-                            value="Filter"
-                            id="my-search-button"
+                            value="<?= $search_form_value ?>"
+                            id="<?= $search_form_name ?>"
                             class="btn btn-primary w-100"
                             href="#"
                             role="button">
                     </div>
                     <div class="d-flex align-items-center">
-                        <label for="my-clearSearch-button">
+                        <label for="<?= $clear_search_name ?>">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-danger" style=" width: 20px; color:red" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                 <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm79 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
                             </svg>
@@ -41,10 +41,10 @@
 
                         <input
                             style="display:none"
-                            name="my-clearSearch-button"
+                            name="<?= $clear_search_name ?>"
                             type="submit"
-                            value="Clear"
-                            id="my-clearSearch-button"
+                            value="<?= $clear_search_value ?>"
+                            id="<?= $clear_search_name ?>"
                             class="btn btn-danger w-100"
                             href="#"
                             role="button">
@@ -79,29 +79,29 @@
                     </tr>
 
                 <?php else: ?>
-                    <?php foreach ($immeubles as $key => $client):
+                    <?php foreach ($immeubles as $key => $immeuble):
                     ?>
 
                         <tr class="">
-                            <td scope="row"><?= $client['id'] ?></td>
-                            <td scope="row"><?= $client['name'] ?></td>
-                            <td scope="row"><?= $client['address'] ?></td>
+                            <td scope="row"><?= $immeuble['id'] ?></td>
+                            <td scope="row"><?= $immeuble['name'] ?></td>
+                            <td scope="row"><?= $immeuble['address'] ?></td>
 
 
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="immeubles/show?id=<?= $client['id'] ?>">
+                                    <a class="btn btn-primary" href="immeubles/show?id=<?= $immeuble['id'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="immeubles/edit?id=<?= $client['id'] ?>">
+                                    <a class="btn btn-warning" href="immeubles/edit?id=<?= $immeuble['id'] ?>">
                                         Modifier
                                     </a>
                                     <form action="" method="post" style="display: inline;">
-                                        <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                        <input type="hidden" name="id" value="<?= $immeuble['id'] ?>">
                                         <input class="btn btn-danger"
                                             type="submit"
-                                            name="my-delete-client-form"
-                                            value="Delete client" />
+                                            name="<?= $delete_form_name ?>"
+                                            value="<?= $delete_form_value ?>" />
                                     </form>
 
 

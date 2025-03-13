@@ -3,28 +3,26 @@ $post_data = $_POST;
 $get_data = $_GET;
 $server = $_SERVER;
 $file_data = $_FILES;
+$form_name = 'edit-immeuble';
+$form_value = 'Mettre à jour';
 
-
-const SUBMIT_VALUE = 'Mettre à jour';
 $errors = [];
 $id = $get_data['id'];
 $client = null;
 
 $rules = [
-    'last_name' => 'string',
-    'first_name' => 'string',
-    'email' => 'email',
-    'phone' => 'string'
+    'name' => 'string',
+    'address' => 'string',
 ];
 
 try {
-    $client = one("immeubles", "id", $id);
+    $immeuble = one("immeubles", "id", $id);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }
 
 if ($server['REQUEST_METHOD'] == "POST") {
-    if (!isset($post_data['my-create-client-form']) || $post_data['my-create-client-form'] !== SUBMIT_VALUE) {
+    if (!isset($post_data[$form_name]) || $post_data[$form_name] !== $form_value) {
         $errors[] = 'Veuillez soumettre de forlumaire';
     } else {
         $validateData = validateData($post_data, $rules);
@@ -43,8 +41,9 @@ if ($server['REQUEST_METHOD'] == "POST") {
     }
 };
 
-
 page("immeubles/edit.page.php", [
-    'client' => $client,
-    'errors' => $errors
+    'immeuble' => $immeuble,
+    'errors' => $errors,
+    'form_name' => $form_name,
+    'form_value' => $form_value,
 ]);

@@ -1,7 +1,11 @@
 <?php
 
-const SUBMIT_VALUE = 'Enregistrer';
 $errors = [];
+$post_data = $_POST;
+$server = $_SERVER;
+$file_data = $_FILES;
+$form_name = 'create-immeuble';
+$form_value = 'Enregistrer';
 
 
 $rules = [
@@ -9,13 +13,10 @@ $rules = [
     'address' => 'string',
 ];
 
-$post_data = $_POST;
-$server = $_SERVER;
-$file_data = $_FILES;
 
 
 if ($server['REQUEST_METHOD'] == "POST") {
-    if (!isset($post_data['my-create-client-form']) || $post_data['my-create-client-form'] !== SUBMIT_VALUE) {
+    if (!isset($post_data[$form_name]) || $post_data[$form_name] !== $form_value) {
         $erros[] = 'Veuillez soumettre de forlumaire';
     } else {
         $validateData = validateData($_POST, $rules);
@@ -36,5 +37,7 @@ if ($server['REQUEST_METHOD'] == "POST") {
 
 page("immeubles/create.page.php", [
     'errors' => $errors,
-    "post_datas" => $post_data
+    "post_datas" => $post_data,
+    'form_name' => $form_name,
+    'form_value' => $form_value,
 ]);
