@@ -6,7 +6,7 @@ const DB_CONFIG = [
     'host' => 'localhost',
     'dbname' => 'gest_immo',
     'port' => '3306',
-    'username' => 'root',
+    'username' => 'big',
     'password' => 'Big@big1'
 ];
 

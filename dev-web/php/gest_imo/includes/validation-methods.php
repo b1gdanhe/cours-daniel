@@ -5,12 +5,20 @@ $error_messages =  require_once(BASE_PATH . 'includes/validation-messages.php');
 function string(string $name, $value, int $min = 1,  $max = INF): array
 {
     global $error_messages;
-    $condition = is_string($value) &&  strlen($value) > 1 && strlen($value) <= $max;
+    $condition = is_string($value) &&  strlen($value) >= $min && strlen($value) <= $max;
     $current_error_message = format_error_message($error_messages['string'], "{attr}", $name);
     return  returnValidationResult($condition, $value, $current_error_message);
 }
 
-function email(string $name, $value, int $min = 1,  $max = INF): array
+function int(string $name, $value, int $min = 1,  $max = INF): array
+{
+    global $error_messages;
+    $condition = is_int($value) &&  $value >= $min && $value <= $max;
+    $current_error_message = format_error_message($error_messages['int'], "{attr}", $name);
+    return  returnValidationResult($condition, $value, $current_error_message);
+}
+
+function email(string $name, $value): array
 {
     global $error_messages;
     $condition = filter_var($value, FILTER_VALIDATE_EMAIL);
@@ -18,21 +26,26 @@ function email(string $name, $value, int $min = 1,  $max = INF): array
     return  returnValidationResult($condition, $value, $current_error_message);
 }
 
+
+
 function exists($table, $column, $value): array
 {
-    $query = "SELECT $column FROM $table WHERE $column = :value";
-    $params =  ['value' => $value];
-    $result  = one($query, $params);
-    return [];
+    global $error_messages;
+    $condition  = one($table, $column, $value);
+    $current_error_message = format_error_message($error_messages['exsist'], "{attr}", $column);
+    return  returnValidationResult($condition, $value, $current_error_message);
 }
+
+
 
 function unique($table, $column, $value): array
 {
     $query = "SELECT $column FROM $table WHERE $column = :value";
     $params =  ['value' => $value];
-    $result  = one($query, $params);
+    $result  = one($query, $column, $value);
     return [];
 }
+
 
 
 
@@ -44,14 +57,6 @@ function validate($value)
         $valueCleaned = htmlspecialchars(strip_tags(trim($value)));
         return empty($valueCleaned) ? false : $valueCleaned;
     }
-}
-
-function existInTable($table, $column, $value)
-{
-    $query = "SELECT $column FROM $table WHERE $column = :value";
-    $params =  ['value' => $value];
-    $result  = one($query, $params);
-    return $result != false;
 }
 
 function is_file_valide(array $file, $types = ['pdf', 'image'], ?int $maxSize = null): array

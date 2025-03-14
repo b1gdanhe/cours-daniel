@@ -20,6 +20,7 @@ function dd( $value, bool $die = true, string $color = 'lightgreen'): void
     $highlighted = highlight_string("<?php " . $output . ";", true); // Colore la sortie
 
     // Supprime les balises <?php et ; ajoutées par highlight_string
+    
     $highlighted = str_replace('&lt;?php&nbsp;', '', $highlighted);
     $highlighted = str_replace(';</code></pre>', '</code></pre>', $highlighted);
     $highlighted = str_replace('#007700', htmlspecialchars($color), $highlighted);
