@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS appartements (
     area INT NOT NULL CHECK (area > 0),
     level INT NOT NULL CHECK (level > 0),
     immeuble_id INT,
-    FOREIGN KEY (immeuble_id) REFERENCES immeubles (id)
+    FOREIGN KEY (immeuble_id) REFERENCES immeubles (id) CASCADE ON DELETE
 );
 
 CREATE TABLE IF NOT EXISTS persons (

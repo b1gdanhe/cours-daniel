@@ -28,42 +28,148 @@ function connectToDb(
 
 $db  = connectToDb();
 
-function all($table, array $params = [],  $searchValue  = null, array $searchColumns = [])
-{
+function all(
+    string $table,
+    array $params = [],
+    string|null $searchValue = null,
+    array $searchColumns = [],
+    array $joins = [],
+    array $select = ['*'],
+    array $orderBy = [],
+    array $pagination = []
+): array {
     global $db;
-    if ($searchValue !== null) {
-        $statment = $db->prepare(search("SELECT * FROM {$table}", $searchValue, $searchColumns));
-        $params = array_merge($params, ['searchValue' => "%" . $searchValue . "%"]);
-        $statment->execute($params);
-        
-    } else {
-        $statment = $db->prepare("SELECT * FROM {$table}");
-        $statment->execute();
+    // Build SELECT clause
+    $selectClause = implode(', ', $select);
+
+    // Start building the query
+    $query = "SELECT {$selectClause} FROM {$table}";
+    // Add JOIN clauses if any
+    if (!empty($joins)) {
+        foreach ($joins as $join) {
+            $joinType = $join['type'] ?? 'INNER';
+            $joinTable = $join['table'] ?? '';
+            $joinCondition = $join['on'] ?? '';
+
+            if ($joinTable && $joinCondition) {
+                $query .= " {$joinType} JOIN {$joinTable} ON {$joinCondition}";
+            }
+        }
     }
-    return $statment->fetchAll();
+
+    // Handle WHERE conditions from params
+    $whereConditions = [];
+    $queryParams = [];
+
+    foreach ($params as $column => $value) {
+        if (is_array($value)) {
+            // Handle special operators like >, <, >=, <=, LIKE, IN
+            $operator = $value['operator'] ?? '=';
+            $paramValue = $value['value'] ?? null;
+
+            if ($operator === 'IN' && is_array($paramValue)) {
+                $placeholders = [];
+                foreach ($paramValue as $index => $val) {
+                    $placeholderKey = "{$column}_in_{$index}";
+                    $placeholders[] = ":{$placeholderKey}";
+                    $queryParams[$placeholderKey] = $val;
+                }
+                $whereConditions[] = "{$column} IN (" . implode(', ', $placeholders) . ")";
+            } else {
+                $whereConditions[] = "{$column} {$operator} :{$column}";
+                $queryParams[$column] = $paramValue;
+            }
+        } else {
+            // Simple equality condition
+            $cc = str_replace('.', '_', $column);
+            $whereConditions[] = "{$column} = :{$cc}";
+            $queryParams[$cc] = $value;
+        }
+    }
+
+    // Add WHERE clause if conditions exist
+    if (!empty($whereConditions)) {
+        $query .= " WHERE " . implode(' AND ', $whereConditions);
+    }
+
+    // Add search condition if needed
+    if ($searchValue !== null && !empty($searchColumns)) {
+        $searchQuery = formatBaseSearchRequest($searchColumns);
+        if (!empty($whereConditions)) {
+            $query .= " AND ({$searchQuery})";
+        } else {
+            $query .= " WHERE {$searchQuery}";
+        }
+        $queryParams['searchValue'] = "%" . $searchValue . "%";
+    }
+
+    // Add ORDER BY if specified
+    if (!empty($orderBy)) {
+        $orderClauses = [];
+        foreach ($orderBy as $column => $direction) {
+            $direction = strtoupper($direction) === 'DESC' ? 'DESC' : 'ASC';
+            $orderClauses[] = "{$column} {$direction}";
+        }
+        if (!empty($orderClauses)) {
+            $query .= " ORDER BY " . implode(', ', $orderClauses);
+        }
+    }
+
+    // Add pagination if specified
+    if (!empty($pagination)) {
+        $limit = $pagination['limit'] ?? null;
+        $offset = $pagination['offset'] ?? null;
+
+        if ($limit !== null) {
+            $query .= " LIMIT {$limit}";
+            if ($offset !== null) {
+                $query .= " OFFSET {$offset}";
+            }
+        }
+    }
+
+    // Prepare and execute the query
+    // dd([$queryParams, $query], false);
+
+    $statement = $db->prepare($query);
+    $statement->execute($queryParams);
+
+    return $statement->fetchAll();
 }
 
-function one(string $table, string $column, $value)
-{
-    global $db;
-    $statment = $db->prepare("SELECT * FROM  {$table} WHERE {$column} = :{$column}");
-    $statment->execute([$column => $value]);
-    return $statment->fetch();
-}
-
-function search(string $previewAQuery, string $searchValue, array $searchColumns): string
-{
-    $previewAQuery .=  (str_contains($previewAQuery, 'WHERE') ? " AND " : " WHERE ");
-    return $previewAQuery . formatBaseSearchRequest($searchColumns);
-}
 
 function formatBaseSearchRequest(array $searchColumns): string
 {
-    $searchColumns =  array_map(function ($column) {
+    $searchConditions = array_map(function ($column) {
         return $column . " LIKE :searchValue";
     }, $searchColumns);
-    return implode(" OR ", $searchColumns);
+
+    return implode(" OR ", $searchConditions);
 }
+
+
+function one(
+    string $tablee,
+    $id,
+    string $idColumn = 'id',
+    array $joins = [],
+    array $select = ['*']
+): ?array {
+    $qualifiedIdColumn = strpos($idColumn, '.') === false ? "{$tablee}.{$idColumn}" : $idColumn;
+
+    $results = all(
+        $tablee,
+        [$qualifiedIdColumn => $id],
+        null,
+        [],
+        $joins,
+        $select
+    );
+
+    return !empty($results) ? $results[0] : null;
+}
+
+
 
 function storeNew($query, array $params = [])
 {
@@ -116,6 +222,7 @@ function update($table, $queryDatas, $searchColumn, $searchValue)
 function delete(string $table, string $column, $value)
 {
     global $db;
+    //dd([$table, $column, $value]);
     $statment = $db->prepare("DELETE FROM {$table} WHERE {$column} = :{$column}");
     return $statment->execute([$column => $value]);
 }

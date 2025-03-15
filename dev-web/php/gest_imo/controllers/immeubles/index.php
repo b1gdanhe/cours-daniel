@@ -13,6 +13,7 @@ $search_form_value = 'Filter';
 $clear_search_name = 'clear-search';
 $clear_search_value = 'Clear';
 
+
 if ($server['REQUEST_METHOD'] === 'POST') {
     if (isset($post_data[$delete_form_name]) && $post_data[$delete_form_name] === $delete_form_value) {
         try {

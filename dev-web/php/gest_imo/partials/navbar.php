@@ -16,10 +16,10 @@ $currentPath =  parse_url($_SERVER['REQUEST_URI'])['path'];
                     <a class="nav-link  <?= isCurrentUrl($currentPath, '/appartements') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/appartements">Appartements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/locataires') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/locataires">Locataires</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/persons') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/persons">Locataires</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/propriétaires') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/propriétaires">Propriétaires</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/owners') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/owners">Propriétaires</a>
                 </li>
 
             </ul>
