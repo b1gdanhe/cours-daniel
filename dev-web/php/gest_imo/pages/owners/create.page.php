@@ -34,34 +34,35 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="jobs" class="form-label">Profession</label>
-                            <input class="form-control" id="jobs" type="text" name="jobs" value="<?= $post_datas['jobs'] ?? "" ?>">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Personne</label>
+                                <select
+                                    class="form-select form-select"
+                                    name="person_id"
+                                    id="">
+                                    <?php foreach ($persons as $person) : ?>
+                                        <option value="<?= $person['id']  ?>" <?= isset($post_datas['person_id']) && $post_datas['person_id'] == $person['id']  ? 'selected' : "" ?>><?= $person['lastname'] . ' ' . $person['firstname'] ?? "" ?></option>
+                                    <?php endforeach ?>
+
+                                </select>
+                            </div>
+
+                            <!-- <input class="form-control" id="name" type="text" name="name" value="<?= $post_datas['appartement_id'] ?? "" ?>"> -->
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['jobs'] ?? "" ?>
+                                <?= $errors['person_id'] ?? "" ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="form-group">
-                            <label for="lastname" class="form-label">Nom</label>
-                            <input class="form-control" id="lastname" type="text" name="lastname" value="<?= $post_datas['lastname'] ?? "" ?>">
+                            <label for="quote_part" class="form-label">Quota</label>
+                            <input class="form-control" id="quote_part" type="number" name="quote_part" value="<?= $post_datas['quote_part'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['lastname'] ?? "" ?>
+                                <?= $errors['quote_part'] ?? "" ?>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="firstname" class="form-label">Prénom</label>
-                            <input class="form-control" id="firstname" type="text" name="firstname" value="<?= $post_datas['firstname'] ?? "" ?>">
-                            <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['firstname'] ?? "" ?>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="row  mt-3 w-100">
@@ -82,9 +83,7 @@
                             href="/"
                             role="button">Annuler</a>
                     </div>
-
                 </div>
-
             </form>
         </div>
     </div>

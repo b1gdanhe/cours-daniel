@@ -1,4 +1,4 @@
-<?php  partial('head.php'); ?>
+<?php partial('head.php'); ?>
 
 <body class="bg-light">
     <?php partial("navbar.php"); ?>
@@ -18,7 +18,7 @@
             <hr style="color: lightgray;">
             <div class="bg-white w-100 p-3 rounded shadow-sm">
                 <div class="">
-                    voyageur : <span class="" style="font-weight: bold"><?= $client['name'] ?></span>
+                    Nom prénom : <span class="" style="font-weight: bold"><?= $client['nom'] . ' ' .  $client['prenom']?></span>
                 </div>
                 <div class="">
                     Adresse : <span class="" style="font-weight: bold"><?= $client['address'] ?></span>

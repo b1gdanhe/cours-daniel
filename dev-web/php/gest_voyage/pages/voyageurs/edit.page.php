@@ -14,25 +14,45 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="name" class="form-label">Nom</label>
-                            <input class="form-control" id="name" type="text" name="name" value="<?= $voyageur['name'] ?? "" ?>">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input class="form-control" id="nom" type="text" name="nom" value="<?= $voyageur['nom'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['name'] ?? "" ?>
+                                <?= $errors['nom'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="address" class="form-label">Addresse</label>
-                            <input class="form-control" id="address" type="text" name="address" value="<?= $voyageur['address'] ?? "" ?>">
+                            <label for="prenom" class="form-label">Addresse</label>
+                            <input class="form-control" id="prenom" type="text" name="prenom" value="<?= $voyageur['prenom'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['address'] ?? "" ?>
+                                <?= $errors['prenom'] ?? "" ?>
                             </div>
                         </div>
 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="ville" class="form-label">Ville</label>
+                            <input class="form-control" id="ville" type="text" name="ville" value="<?= $voyageur['ville'] ?? "" ?>">
+                            <div class="text-danger" style="font-size: 12px;">
+                                <?= $errors['ville'] ?? "" ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="region" class="form-label">Region</label>
+                            <input class="form-control" id="region" type="text" name="region" value="<?= $voyageur['region'] ?? "" ?>">
+                            <div class="text-danger" style="font-size: 12px;">
+                                <?= $errors['region'] ?? "" ?>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
 
                 <div class="row  mt-3 w-100">
                     <div class="col-3 ">

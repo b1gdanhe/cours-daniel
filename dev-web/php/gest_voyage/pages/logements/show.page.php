@@ -18,7 +18,7 @@
             <hr style="color: lightgray;">
             <div class="bg-white w-100 p-3 rounded shadow-sm">
                 <div class="">
-                    Appartement : <span class="" style="font-weight: bold"><?= $client['name'] ?></span>
+                    logement : <span class="" style="font-weight: bold"><?= $client['name'] ?></span>
                 </div>
                 <div class="">
                     Adresse : <span class="" style="font-weight: bold"><?= $client['address'] ?></span>

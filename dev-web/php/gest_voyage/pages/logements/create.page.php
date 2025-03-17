@@ -5,7 +5,7 @@
     <div
         <div class="d-flex flex-column w-100 align-items-center jsutify-content-center mt-4">
         <div class="fs-3 text-center w-100">
-            Ajout appartements
+            Ajout logements
         </div>
         <div class="w-50 bg-white  p-4 border shadow-sm rounded mt-2">
 
@@ -13,31 +13,19 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Appartement</label>
-                                <select
-                                    class="form-select form-select"
-                                    name="appartement_id"
-                                    id="">
-                                    <?php foreach ($appartements as $appartement) : ?>
-                                        <option value="<?= $appartement['id']  ?>" <?= isset($post_datas['appartement_id']) && $post_datas['appartement_id'] == $appartement['id']  ? 'selected' : "" ?>><?= $appartement['name'] . '(' . $appartement['number'] . ')' ?? "" ?></option>
-                                    <?php endforeach ?>
-
-                                </select>
-                            </div>
-
-                            <!-- <input class="form-control" id="name" type="text" name="name" value="<?= $post_datas['appartement_id'] ?? "" ?>"> -->
+                            <label for="nom" class="form-label">Nom</label>
+                            <input class="form-control" id="nom" type="text" name="nom" value="<?= $post_datas['nom'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['appartement_id'] ?? "" ?>
+                                <?= $errors['nom'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="jobs" class="form-label">Profession</label>
-                            <input class="form-control" id="jobs" type="text" name="jobs" value="<?= $post_datas['jobs'] ?? "" ?>">
+                            <label for="capacite" class="form-label">Capacité</label>
+                            <input class="form-control" id="capacite" type="number" name="capacite" value="<?= $post_datas['capacite'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['jobs'] ?? "" ?>
+                                <?= $errors['capacite'] ?? "" ?>
                             </div>
                         </div>
 
@@ -46,19 +34,19 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="lastname" class="form-label">Nom</label>
-                            <input class="form-control" id="lastname" type="text" name="lastname" value="<?= $post_datas['lastname'] ?? "" ?>">
+                            <label for="type" class="form-label">Type</label>
+                            <input class="form-control" id="type" type="text" name="type" value="<?= $post_datas['type'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['lastname'] ?? "" ?>
+                                <?= $errors['type'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="firstname" class="form-label">Prénom</label>
-                            <input class="form-control" id="firstname" type="text" name="firstname" value="<?= $post_datas['firstname'] ?? "" ?>">
+                            <label for="lieu" class="form-label">Lieu</label>
+                            <input class="form-control" id="lieu" type="text" name="lieu" value="<?= $post_datas['lieu'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['firstname'] ?? "" ?>
+                                <?= $errors['lieu'] ?? "" ?>
                             </div>
                         </div>
 

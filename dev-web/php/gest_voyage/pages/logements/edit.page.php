@@ -5,39 +5,28 @@
     <div
         <div class="d-flex flex-column w-100 align-items-center jsutify-content-center mt-4">
         <div class="fs-3 text-center w-100">
-            Modification appartements
+            Modifier logement
         </div>
-        <div class="w-50 bg-white  p-4 border shadow-sm rounded mt-2">
+
+        <div class="w-50 bg-white  p-4 border shadow-sm rounded">
 
             <form action="" method="post" enctype="multipart/form-data">
-                <div class="row">
+            <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Immeuble</label>
-                                <select
-                                    class="form-select form-select"
-                                    name="immeuble_id"
-                                    id="">
-                                    <?php foreach ($immeubles as $immeuble) : ?>
-                                        <option value="<?= $immeuble['id']  ?>" <?= isset($appartement['immeuble_id']) && $appartement['immeuble_id'] == $immeuble['id']  ? 'selected' : "" ?>><?= $immeuble['name'] ?? "" ?></option>
-                                    <?php endforeach ?>
-
-                                </select>
-                            </div>
-
-                            <!-- <input class="form-control" id="name" type="text" name="name" value="<?= $appartement['name'] ?? "" ?>"> -->
+                            <label for="nom" class="form-label">Nom</label>
+                            <input class="form-control" id="nom" type="text" name="nom" value="<?= $logement['nom'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['immeuble_id'] ?? "" ?>
+                                <?= $errors['nom'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="number" class="form-label">Numéro</label>
-                            <input class="form-control" id="number" type="number" name="number" value="<?= $appartement['number'] ?? "" ?>">
+                            <label for="capacite" class="form-label">Capacité</label>
+                            <input class="form-control" id="capacite" type="number" name="capacite" value="<?= $logement['capacite'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['number'] ?? "" ?>
+                                <?= $errors['capacite'] ?? "" ?>
                             </div>
                         </div>
 
@@ -46,24 +35,25 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="level" class="form-label">Niveau</label>
-                            <input class="form-control" id="level" type="number" name="level" value="<?= $appartement['level'] ?? "" ?>">
+                            <label for="type" class="form-label">Type</label>
+                            <input class="form-control" id="type" type="text" name="type" value="<?= $logement['type'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['level'] ?? "" ?>
+                                <?= $errors['type'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="area" class="form-label">Superficie</label>
-                            <input class="form-control" id="area" type="number" name="area" value="<?= $appartement['area'] ?? "" ?>">
+                            <label for="lieu" class="form-label">Lieu</label>
+                            <input class="form-control" id="lieu" type="text" name="lieu" value="<?= $logement['lieu'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['area'] ?? "" ?>
+                                <?= $errors['lieu'] ?? "" ?>
                             </div>
                         </div>
 
                     </div>
                 </div>
+
                 <div class="row  mt-3 w-100">
                     <div class="col-3 ">
                         <input

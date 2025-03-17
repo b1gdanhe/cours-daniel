@@ -7,11 +7,11 @@ return [
     '/voyageurs/edit' => controller("voyageurs/edit.php"),
     '/voyageurs/show' => controller("voyageurs/show.php"),
 
-    // '/appartements' => controller("appartements/index.php"),
-    // '/appartements' => controller("appartements/index.php"),
-    // '/appartements/create' => controller("appartements/create.php"),
-    // '/appartements/edit' => controller("appartements/edit.php"),
-    // '/appartements/show' => controller("appartements/show.php"),
+    '/logements' => controller("logements/index.php"),
+    '/logements' => controller("logements/index.php"),
+    '/logements/create' => controller("logements/create.php"),
+    '/logements/edit' => controller("logements/edit.php"),
+    '/logements/show' => controller("logements/show.php"),
 
     // '/persons' => controller("persons/index.php"),
     // '/persons' => controller("persons/index.php"),
@@ -19,9 +19,9 @@ return [
     // '/persons/edit' => controller("persons/edit.php"),
     // '/persons/show' => controller("persons/show.php"),
 
-    // '/owners' => controller("owners/index.php"),
-    // '/owners' => controller("owners/index.php"),
-    // '/owners/create' => controller("owners/create.php"),
-    // '/owners/edit' => controller("owners/edit.php"),
-    // '/owners/show' => controller("owners/show.php"),
+    '/sejours' => controller("sejours/index.php"),
+    '/sejours' => controller("sejours/index.php"),
+    '/sejours/create' => controller("sejours/create.php"),
+    '/sejours/edit' => controller("sejours/edit.php"),
+    '/sejours/show' => controller("sejours/show.php"),
 ];

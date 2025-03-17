@@ -13,10 +13,10 @@ $currentPath =  parse_url($_SERVER['REQUEST_URI'])['path'];
                     <a class="nav-link  <?= isCurrentUrl($currentPath, '/') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/">Voyageurs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/appartements') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/appartements">Logements</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/logements') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/logements">Logements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/persons') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/persons">Sejours</a>
+                    <a class="nav-link  <?= isCurrentUrl($currentPath, '/sejours') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/sejours">Sejours</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  <?= isCurrentUrl($currentPath, '/owners') ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, '/') ? 'page' : '' ?>" href="/owners">Acitvités</a>

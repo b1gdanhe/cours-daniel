@@ -1,10 +1,10 @@
 <?php
-$voyageurs = [];
+$logements = [];
 $params = [];
 
 $post_data = $_POST;
 $server = $_SERVER;
-$delete_form_name = 'delete-voyageurs';
+$delete_form_name = 'delete-logements';
 $delete_form_value = 'Delete';
 
 $search_form_name = 'search';
@@ -17,7 +17,7 @@ $clear_search_value = 'Clear';
 if ($server['REQUEST_METHOD'] === 'POST') {
     if (isset($post_data[$delete_form_name]) && $post_data[$delete_form_name] === $delete_form_value) {
         try {
-            delete('voyageurs', 'id_voyageur',  $post_data['id_voyageur']);
+            delete('logements', 'id_logement',  $post_data['id_logement']);
             header("Location: /");
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -26,20 +26,20 @@ if ($server['REQUEST_METHOD'] === 'POST') {
     if (isset($post_data[$search_form_name]) && $post_data[$search_form_name] === $search_form_value) {
         if ($search_key = validate($post_data['search_key'])) {
             //   $params['search_key'] = '%' . $search_key . '%';
-            $voyageurs = all("voyageurs", $params, $search_key, ['nom', 'prenom']);
+            $logements = all("logements", $params, $search_key, ['nom', 'lieu']);
         }
     }
     if (isset($post_data[$clear_search_name]) && $post_data[$clear_search_name] === $clear_search_value) {
         unset($post_data['search_key']);
         try {
-            $voyageurs = all("voyageurs", $params);
+            $logements = all("logements", $params);
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
     }
 } else {
     try {
-        $voyageurs = all("voyageurs", $params);
+        $logements = all("logements", $params);
     } catch (\Throwable $th) {
         dd($th->getMessage());
     }
@@ -48,8 +48,8 @@ if ($server['REQUEST_METHOD'] === 'POST') {
 
 
 
-page("voyageurs/index.page.php", [
-    'voyageurs' => $voyageurs,
+page("logements/index.page.php", [
+    'logements' => $logements,
 
     'delete_form_name' => $delete_form_name,
     'delete_form_value' => $delete_form_value,

@@ -5,59 +5,71 @@
     <div
         <div class="d-flex flex-column w-100 align-items-center jsutify-content-center mt-4">
         <div class="fs-3 text-center w-100">
-            Modification appartements
+            Modification Sejour
         </div>
         <div class="w-50 bg-white  p-4 border shadow-sm rounded mt-2">
 
             <form action="" method="post" enctype="multipart/form-data">
-                <div class="row">
+            <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <div class="mb-3">
-                                <label for="appartement_id" class="form-label">Appartement</label>
+                                <label for="code_logement" class="form-label">Logement</label>
                                 <select
                                     class="form-select form-select"
-                                    name="appartement_id"
-                                    id="appartement_id">
-                                    <?php foreach ($appartements as $appartement) : ?>
-                                        <option value="<?= $appartement['id']?? $person['appartement_id']  ?>" <?= isset($person['appartement_id']) && $person['appartement_id'] == $appartement['id']  ? 'selected' : "" ?>><?= $appartement['name'] . '(' . $appartement['number'] . ')' ?? "" ?></option>
+                                    name="code_logement"
+                                    id="">
+                                    <?php foreach ($logements as $logement) : ?>
+                                        <option value="<?= $logement['code']  ?>" <?= isset($sejour['code_logement']) && $sejour['code_logement'] == $logement['code']  ? 'selected' : "" ?>><?= $logement['nom'] ?? "" ?></option>
                                     <?php endforeach ?>
 
                                 </select>
                             </div>
 
+                            <!-- <input class="form-control" id="name" type="text" name="name" value="<?= $sejour['code_logement'] ?? "" ?>"> -->
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['appartement_id'] ?? "" ?>
+                                <?= $errors['code_logement'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="jobs" class="form-label">Profession</label>
-                            <input class="form-control" id="jobs" type="text" name="jobs" value="<?= $person['jobs'] ?? "" ?>">
+                            <div class="mb-3">
+                                <label for="id_voyageur" class="form-label">Voyageur</label>
+                                <select
+                                    class="form-select form-select"
+                                    name="id_voyageur"
+                                    id="">
+                                    <?php foreach ($voyageurs as $voyageur) : ?>
+                                        <option value="<?= $voyageur['id_voyageur']  ?>" <?= isset($sejour['id_voyageur']) && $sejour['id_voyageur'] == $voyageur['id_voyageur']  ? 'selected' : "" ?>><?= $voyageur['nom'] . " " . $voyageur['prenom'] ?></option>
+                                    <?php endforeach ?>
+
+                                </select>
+                            </div>
+
+                            <!-- <input class="form-control" id="name" type="text" name="name" value="<?= $sejour['id_voyageur'] ?? "" ?>"> -->
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['jobs'] ?? "" ?>
+                                <?= $errors['id_voyageur'] ?? "" ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="lastname" class="form-label">Nom</label>
-                            <input class="form-control" id="lastname" type="text" name="lastname" value="<?= $person['lastname'] ?? "" ?>">
+                            <label for="debut" class="form-label">Date de debut</label>
+                            <input class="form-control" id="debut" type="date" name="debut" value="<?= $sejour['debut'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['lastname'] ?? "" ?>
+                                <?= $errors['debut'] ?? "" ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="firstname" class="form-label">Prénom</label>
-                            <input class="form-control" id="firstname" type="text" name="firstname" value="<?= $person['firstname'] ?? "" ?>">
+                            <label for="fin" class="form-label">Date de fin</label>
+                            <input class="form-control" id="fin" type="date" name="fin" value="<?= $sejour['fin'] ?? "" ?>">
                             <div class="text-danger" style="font-size: 12px;">
-                                <?= $errors['firstname'] ?? "" ?>
+                                <?= $errors['fin'] ?? "" ?>
                             </div>
                         </div>
 

@@ -19,12 +19,15 @@ function validateData(array $requestData, array $columnsRules): array
 
         // Process the rules for this column
         $rulesList = parseRules($columnRules);
-
         foreach ($rulesList as $ruleData) {
             $ruleName = $ruleData['name'];
             $ruleParams = $ruleData['params'];
 
             // Skip if the rule doesn't exist as a function
+            if ($ruleName == '') {
+                $validationResult[$column] = $valueCleaned;
+                continue;
+            }
             if (!function_exists($ruleName)) {
                 continue;
             }

@@ -55,7 +55,7 @@
                 name=""
                 id=""
                 class="btn btn-dark"
-                href="/owners/create"
+                href="/logements/create"
                 role="button">Add</a>
 
         </div>
@@ -65,14 +65,14 @@
                 <tr>
                     <th scope="col"> #</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Profession</th>
-                    <th scope="col">Appart</th>
+                    <th scope="col">Capacité</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Lieu</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (count($owners) === 0): ?>
+                <?php if (count($logements) === 0): ?>
                     <tr>
                         <td colspan="6" class="text-center">
                             Pas de données trouvées
@@ -81,27 +81,27 @@
                     </tr>
 
                 <?php else: ?>
-                    <?php foreach ($owners as $key => $owner):
+                    <?php foreach ($logements as $key => $logement):
                     ?>
 
                         <tr class="">
-                            <td scope="row"><?= $owner['id'] ?></td>
-                            <td scope="row"><?= $owner['lastname'] ?></td>
-                            <td scope="row"><?= $owner['firstname'] ?></td>
-                            <td scope="row"><?= $owner['jobs'] ?></td>
-                            <td scope="row"><?= $owner['name'] ?>(<?= $owner['number'] ?>)</td>
+                            <td scope="row"><?= $logement['code'] ?></td>
+                            <td scope="row"><?= $logement['nom'] ?></td>
+                            <td scope="row"><?= $logement['capacite'] ?></td>
+                            <td scope="row"><?= $logement['type'] ?></td>
+                            <td scope="row"><?= $logement['lieu'] ?></td>
 
 
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="owners/show?id=<?= $owner['id'] ?>">
+                                    <a class="btn btn-primary" href="logements/show?code=<?= $logement['code'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="owners/edit?id=<?= $owner['id'] ?>">
+                                    <a class="btn btn-warning" href="logements/edit?code=<?= $logement['code'] ?>">
                                         Modifier
                                     </a>
                                     <form action="" method="post" style="display: inline;">
-                                        <input type="hidden" name="id" value="<?= $owner['id'] ?>">
+                                        <input type="hidden" name="code" value="<?= $logement['code'] ?>">
                                         <input class="btn btn-danger"
                                             type="submit"
                                             name="<?= $delete_form_name ?>"

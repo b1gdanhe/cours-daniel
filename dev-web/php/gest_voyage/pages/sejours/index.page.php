@@ -55,7 +55,7 @@
                 name=""
                 id=""
                 class="btn btn-dark"
-                href="/appartements/create"
+                href="/sejours/create"
                 role="button">Add</a>
 
         </div>
@@ -64,15 +64,15 @@
             <thead class="table-light">
                 <tr>
                     <th scope="col"> #</th>
-                    <th scope="col">Immeuble</th>
-                    <th scope="col">Niveau d'immeuble</th>
-                    <th scope="col">Numéro d'appart</th>
-                    <th scope="col">Superficie</th>
+                    <th scope="col">Voyageur</th>
+                    <th scope="col">Logement</th>
+                    <th scope="col">Debut</th>
+                    <th scope="col">Fin</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (count($appartements) === 0): ?>
+                <?php if (count($sejours) === 0): ?>
                     <tr>
                         <td colspan="6" class="text-center">
                             Pas de données trouvées
@@ -81,27 +81,27 @@
                     </tr>
 
                 <?php else: ?>
-                    <?php foreach ($appartements as $key => $appartement):
+                    <?php foreach ($sejours as $key => $sejour):
                     ?>
 
                         <tr class="">
-                            <td scope="row"><?= $appartement['id'] ?></td>
-                            <td scope="row"><?= $appartement['name'] ?></td>
-                            <td scope="row"><?= $appartement['level'] ?></td>
-                            <td scope="row"><?= $appartement['number'] ?></td>
-                            <td scope="row"><?= $appartement['area'] ?></td>
+                            <td scope="row"><?= $sejour['id_sejour'] ?></td>
+                            <td scope="row"><?= $sejour['prenom'] ?></td>
+                            <td scope="row"><?= $sejour['nom'] ?></td>
+                            <td scope="row"><?= $sejour['fin'] ?></td>
+                            <td scope="row"><?= $sejour['debut'] ?></td>
 
 
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="appartements/show?id=<?= $appartement['id'] ?>">
+                                    <a class="btn btn-primary" href="sejours/show?id_sejour=<?= $sejour['id_sejour'] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="appartements/edit?id=<?= $appartement['id'] ?>">
+                                    <a class="btn btn-warning" href="sejours/edit?id_sejour=<?= $sejour['id_sejour'] ?>">
                                         Modifier
                                     </a>
                                     <form action="" method="post" style="display: inline;">
-                                        <input type="hidden" name="id" value="<?= $appartement['id'] ?>">
+                                        <input type="hidden" name="id_sejour" value="<?= $sejour['id_sejour'] ?>">
                                         <input class="btn btn-danger"
                                             type="submit"
                                             name="<?= $delete_form_name ?>"

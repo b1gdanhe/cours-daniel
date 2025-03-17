@@ -1,10 +1,10 @@
 <?php
-$appartements = [];
+$sejours = [];
 $params = [];
 
 $post_data = $_POST;
 $server = $_SERVER;
-$delete_form_name = 'delete-appartements';
+$delete_form_name = 'delete-sejours';
 $delete_form_value = 'Delete';
 
 $search_form_name = 'search';
@@ -12,14 +12,38 @@ $search_form_value = 'Filter';
 
 $clear_search_name = 'clear-search';
 $clear_search_value = 'Clear';
-$columnSelects = ['appartements.id', 'immeubles.name', 'appartements.level', 'appartements.area', 'appartements.number', "immeubles.address",  'appartements.immeuble_id'];
+$relations = [
+    [
+        'table' => 'logements',
+        'type' => 'INNER',
+        'on' => 'sejours.code_logement = logements.code'
+    ],
+    [
+        'table' => 'voyageurs',
+        'type' => 'INNER',
+        'on' => 'sejours.id_voyageur = voyageurs.id_voyageur'
+    ]
+];
+
+$columnSelects = [
+    'sejours.id_sejour',
+    'sejours.debut',
+    'sejours.fin',
+    'sejours.id_voyageur',
+    'sejours.code_logement',
+    'logements.nom',
+    'logements.capacite',
+    'voyageurs.prenom',
+];
+
+
+
 
 if ($server['REQUEST_METHOD'] === 'POST') {
     if (isset($post_data[$delete_form_name]) && $post_data[$delete_form_name] === $delete_form_value) {
         try {
-
-            delete('appartements', 'id',  $post_data['id']);
-            header("Location: /appartements");
+            delete('sejours', 'id_sejour',  $post_data['id_sejour']);
+            header("Location: /sejours");
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }
@@ -28,32 +52,18 @@ if ($server['REQUEST_METHOD'] === 'POST') {
         if ($search_key = validate($post_data['search_key'])) {
             //   $params['search_key'] = '%' . $search_key . '%';
 
-
-            $appartements =   all("appartements", $params, $search_key, ['name', 'address'], [
-                [
-                    'table' => 'immeubles',
-                    'type' => 'INNER',
-                    'on' => 'appartements.immeuble_id = immeubles.id'
-                ]
-            ]);
+            $sejours =   all("sejours", $params, $search_key, ['debut', 'fin', 'logements.nom', 'voyageurs.prenom'], $relations, $columnSelects);
         }
     }
     if (isset($post_data[$clear_search_name]) && $post_data[$clear_search_name] === $clear_search_value) {
         unset($post_data['search_key']);
         try {
-            $appartements = all(
-                "appartements",
+            $sejours = all(
+                "sejours",
                 $params,
                 null,
                 [],
-                [
-                    [
-                        'table' => 'immeubles',
-                        'type' => 'LEFT',
-                        'on' => 'appartements.immeuble_id = immeubles.id'
-                    ],
-
-                ],
+                $relations,
                 $columnSelect
             );
         } catch (\Throwable $th) {
@@ -62,18 +72,12 @@ if ($server['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     try {
-        $appartements = all(
-            "appartements",
+        $sejours = all(
+            "sejours",
             $params,
             null,
             [],
-            [
-                [
-                    'table' => 'immeubles',
-                    'type' => 'LEFT',
-                    'on' => 'appartements.immeuble_id = immeubles.id'
-                ],
-            ],
+            $relations,
             $columnSelects
         );
     } catch (\Throwable $th) {
@@ -82,11 +86,8 @@ if ($server['REQUEST_METHOD'] === 'POST') {
 }
 
 
-//dd($appartements);
-
-page("appartements/index.page.php", [
-    'appartements' => $appartements,
-
+page("sejours/index.page.php", [
+    'sejours' => $sejours,
     'delete_form_name' => $delete_form_name,
     'delete_form_value' => $delete_form_value,
 

@@ -42,13 +42,18 @@ if ($server['REQUEST_METHOD'] === 'POST') {
         if ($search_key = validate($post_data['search_key'])) {
             //   $params['search_key'] = '%' . $search_key . '%';
 
-            $persons =   all("persons", $params, $search_key, ['name', 'address'], [
+            $persons =   all("persons", $params, $search_key, ['firstname', 'lastname'], [
                 [
                     'table' => 'appartements',
                     'type' => 'INNER',
                     'on' => 'persons.appartement_id = appartements.id'
+                ],
+                [
+                    'table' => 'immeubles',
+                    'type' => 'INNER',
+                    'on' => 'appartements.immeuble_id = immeubles.id'
                 ]
-            ]);
+            ], $columnSelects);
         }
     }
     if (isset($post_data[$clear_search_name]) && $post_data[$clear_search_name] === $clear_search_value) {

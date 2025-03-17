@@ -63,12 +63,10 @@
             class="table   ">
             <thead class="table-light">
                 <tr>
-                    <th scope="col"> #</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
-                    <th scope="col">Profession</th>
                     <th scope="col">Appart</th>
-                    <th scope="col">Actions</th>
+                    <!-- <th scope="col">Actions</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -85,14 +83,12 @@
                     ?>
 
                         <tr class="">
-                            <td scope="row"><?= $owner['id'] ?></td>
                             <td scope="row"><?= $owner['lastname'] ?></td>
                             <td scope="row"><?= $owner['firstname'] ?></td>
-                            <td scope="row"><?= $owner['jobs'] ?></td>
-                            <td scope="row"><?= $owner['name'] ?>(<?= $owner['number'] ?>)</td>
+                            <td scope="row"> <?= $owner['number'] ?></td>
 
 
-                            <td scope="row">
+                            <!-- <td scope="row">
                                 <div>
                                     <a class="btn btn-primary" href="owners/show?id=<?= $owner['id'] ?>">
                                         Details
@@ -110,7 +106,7 @@
 
 
                                 </div>
-                            </td>
+                            </td> -->
 
                         </tr>
                     <?php endforeach ?>

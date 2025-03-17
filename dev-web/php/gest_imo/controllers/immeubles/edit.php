@@ -16,7 +16,7 @@ $rules = [
 ];
 
 try {
-    $immeuble = one("immeubles", "id", $id);
+    $immeuble = one("immeubles",  $id, "id",);
 } catch (\Throwable $th) {
     dd($th->getMessage());
 }
