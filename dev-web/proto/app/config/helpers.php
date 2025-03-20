@@ -60,12 +60,12 @@ function base_path(string $path): string
     return BASE_PATH . $path;
 }
 
-function treatment(string $path, $data = [])
+function controller(string $path, $data = [])
 {
-     require base_path("treatments/{$path}");
+    require base_path("controllers/{$path}");
 }
 
 function page(string $path, $data = [])
 {
-     require base_path("pages/{$path}");
+    require base_path("pages/{$path}");
 }
