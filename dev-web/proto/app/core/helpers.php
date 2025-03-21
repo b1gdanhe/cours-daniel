@@ -59,6 +59,11 @@ function base_path(string $path): string
 {
     return BASE_PATH . $path;
 }
+function app_path(string $path): string
+{
+    return base_path("app/$path");
+}
+
 
 function controller(string $path, $data = [])
 {
@@ -67,5 +72,11 @@ function controller(string $path, $data = [])
 
 function page(string $path, $data = [])
 {
-    require base_path("pages/{$path}");
+    extract($data);
+    require app_path("pages/{$path}");
+}
+
+function asset(string $path)
+{
+    return  "assets/{$path}";
 }
