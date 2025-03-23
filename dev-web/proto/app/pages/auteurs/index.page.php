@@ -1,4 +1,4 @@
-<?php page('partials/head.php', ['pageTitle'=> $pageTitle]) ?>
+<?php page('partials/head.php', ['pageTitle' => $pageTitle]) ?>
 
 <div class=" bg-white m-3 shadow-sm" style="height: calc(100dvh-70px);">
     <div
@@ -30,8 +30,8 @@
                 name=""
                 id=""
                 class="btn btn-dark"
-                href="/livres/create"
-                role="button">Add</a>
+                href="/auteurs/create"
+                role="button">Ajout</a>
 
         </div>
         <table
@@ -40,14 +40,12 @@
                 <tr>
                     <th scope="col"> #</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Régions</th>
+                    <th scope="col">Adresse</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (count($livres) === 0): ?>
+                <?php if (count($auteurs) === 0): ?>
                     <tr>
                         <td colspan="6" class="text-center">
                             Pas de données trouvées
@@ -56,27 +54,26 @@
                     </tr>
 
                 <?php else: ?>
-                    <?php foreach ($livres as $key => $livre):
+                    <?php foreach ($auteurs as $key => $auteur):
                     ?>
 
                         <tr class="">
-                            <td scope="row"><?= $livre['id_livre'] ?></td>
-                            <td scope="row"><?= $livre['nom'] ?></td>
-                            <td scope="row"><?= $livre['prenom'] ?></td>
-                            <td scope="row"><?= $livre['ville'] ?></td>
-                            <td scope="row"><?= $livre['region'] ?></td>
+                            <td scope="row"><?= $auteur[$primaryKey] ?></td>
+                            <td scope="row"><?= $auteur['nom'] ?></td>
+
+                            <td scope="row"><?= $auteur['adresse'] ?></td>
 
 
                             <td scope="row">
                                 <div>
-                                    <a class="btn btn-primary" href="livres/show?id_livre=<?= $livre['id_livre'] ?>">
+                                    <a class="btn btn-primary" href="auteurs/show?<?= $primaryKey ?>=<?= $auteur[$primaryKey] ?>">
                                         Details
                                     </a>
-                                    <a class="btn btn-warning" href="livres/edit?id_livre=<?= $livre['id_livre'] ?>">
+                                    <a class="btn btn-warning" href="auteurs/edit?<?= $primaryKey ?>=<?= $auteur[$primaryKey] ?>">
                                         Modifier
                                     </a>
-                                    <form action="" method="post" style="display: inline;">
-                                        <input type="hidden" name="id_livre" value="<?= $livre['id_livre'] ?>">
+                                    <form action="/auteurs/delete" method="post" style="display: inline;">
+                                        <input type="hidden" name="<?= $primaryKey ?>" value="<?= $auteur[$primaryKey] ?>">
                                         <input class="btn btn-danger"
                                             type="submit"
                                             name="<?= $delete_form_name ?>"

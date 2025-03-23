@@ -1,9 +1,9 @@
 <?php
 
-class LivreController extends BaseController
+class EditeurController extends BaseController
 {
-    private $table = 'livres';
-    private $primaryKey = 'num_etd';
+    private $table = 'editeurs';
+    private $primaryKey = 'num_editeur';
     private $create_form_name = 'create-form';
     private $create_form_value = 'Enregistrer';
     private $edit_form_name = 'edit-form';
@@ -13,15 +13,15 @@ class LivreController extends BaseController
 
     public function index()
     {
-        $livres = Database::table($this->table)->findAll();
+        $editeurs = Database::table($this->table)->findAll();
         $search_form_name = 'search-form';
         $search_form_value = 'Rechercher';
         $clear_search_name = 'search-form-clear';
         $clear_search_value = 'Vider';
-        $pageTitle = 'Livres';
+        $pageTitle = 'Editeurs';
 
-        $this->render('livres/index.page.php', [
-            'livres' => $livres,
+        $this->render('editeurs/index.page.php', [
+            'editeurs' => $editeurs,
             'primaryKey' => $this->primaryKey,
             'search_form_name' => $search_form_name,
             'search_form_value' => $search_form_value,
@@ -35,8 +35,8 @@ class LivreController extends BaseController
 
     public function create()
     {
-        $pageTitle = 'Ajout etudiant';
-        $this->render('livres/create.page.php', [
+        $pageTitle = 'Ajout editeur';
+        $this->render('editeurs/create.page.php', [
             'form_name' => $this->create_form_name,
             'form_value' => $this->create_form_value,
             'pageTitle' => $pageTitle,
@@ -47,19 +47,18 @@ class LivreController extends BaseController
     {
         $rules = [
             'nom' => 'required',
-            'prenom' => 'required',
             'adresse' => 'required',
         ];
         $validatedData = $this->validate($_POST, $rules);
 
         if (!$validatedData) {
-            redirect('/livres/create', [
+            redirect('/editeurs/create', [
                 'errors' => $this->validator->getErrors(),
                 'old' => $_POST
             ]);
         }
         Database::table($this->table)->insert($validatedData);
-        redirect('/livres', [
+        redirect('/editeurs', [
             'errors' => $this->validator->getErrors(),
             'old' => []
         ]);
@@ -67,40 +66,39 @@ class LivreController extends BaseController
 
     public function edit()
     {
-        $numetudiant = $_GET[$this->primaryKey];
-        $etudiant =  Database::table($this->table)::primaryKey($this->primaryKey)->findById($numetudiant);
-        $pageTitle = 'Modifier etudiant';
+        $numediteur = $_GET[$this->primaryKey];
+        $editeur =  Database::table($this->table)::primaryKey($this->primaryKey)->findById($numediteur);
+        $pageTitle = 'Modifier editeur';
 
-        $this->render('livres/edit.page.php', [
+        $this->render('editeurs/edit.page.php', [
             'primaryKey' => $this->primaryKey,
             'form_name' => $this->edit_form_name,
             'form_value' => $this->edit_form_value,
             'pageTitle' => $pageTitle,
-            'etudiant' => $etudiant,
+            'editeur' => $editeur,
         ]);
     }
 
     public function update()
     {
-        $numetudiant = $_POST[$this->primaryKey];
+        $numediteur = $_POST[$this->primaryKey];
         $rules = [
             'nom' => 'required',
-            'prenom' => 'required',
             'adresse' => 'required',
         ];
         $validatedData = $this->validate($_POST, $rules);
 
         if (!$validatedData) {
-            redirect('/livres/edit', [
+            redirect('/editeurs/edit', [
                 'errors' => $this->validator->getErrors(),
                 'old' => $_POST
             ]);
         }
         Database::table($this->table)
             ::primaryKey($this->primaryKey)
-            ->update($numetudiant, $validatedData);
+            ->update($numediteur, $validatedData);
 
-        redirect('/livres', [
+        redirect('/editeurs', [
             'errors' => $this->validator->getErrors(),
             'old' => []
         ]);
@@ -108,11 +106,11 @@ class LivreController extends BaseController
 
     public function delete()
     {
-        $numetudiant = $_POST[$this->primaryKey];
-        Database::table($this->table)::primaryKey($this->primaryKey)->delete($numetudiant);
-        $pageTitle = 'Modifier etudiant';
+        $numediteur = $_POST[$this->primaryKey];
+        Database::table($this->table)::primaryKey($this->primaryKey)->delete($numediteur);
+        $pageTitle = 'Modifier editeur';
 
-        redirect('/livres', [
+        redirect('/editeurs', [
             'errors' => $this->validator->getErrors(),
             'old' => []
         ]);

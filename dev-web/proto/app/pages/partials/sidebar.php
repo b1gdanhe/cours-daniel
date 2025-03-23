@@ -1,52 +1,40 @@
+<?php
+$currentPath = parse_url($_SERVER['REQUEST_URI'])['path'];
+$navUrls = [
+
+    [
+        'name' => 'Auteurs',
+        'url' => '/',
+    ],
+    [
+        'name' => 'Editeurs',
+        'url' => '/editeurs',
+    ],
+    [
+        'name' => 'Etudiants',
+        'url' => '/etudiants',
+    ],
+    [
+        'name' => 'Livres',
+        'url' => '/livres',
+    ],
+
+];
+?>
 <nav class="d-flex flex-column flex-shrink-0 p-3 bg-white shadow-sm" style="width: 280px; height:100dvh">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
-        </svg>
-        <span class="fs-4">Sidebar</span>
+        <span class="fs-4">Biblio</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#home"></use>
-                </svg>
-                Home
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#speedometer2"></use>
-                </svg>
-                Dashboard
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#table"></use>
-                </svg>
-                Orders
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#grid"></use>
-                </svg>
-                Products
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16">
-                    <use xlink:href="#people-circle"></use>
-                </svg>
-                Customers
-            </a>
-        </li>
+        <?php foreach ($navUrls as $navUrl): ?>
+            <li class="nav-item">
+                <a class="nav-link nav-pills-link-active-bg-secondary <?= isCurrentUrl($currentPath, $navUrl['url']) ? 'active' : '' ?>" aria-current="<?= isCurrentUrl($currentPath, $navUrl['url']) ? 'page' : '' ?>" href="<?= $navUrl['url'] ?>">
+                    <?= $navUrl['name'] ?>
+                </a>
+            </li>
+        <?php endforeach ?>
+
     </ul>
     <hr>
     <div class="dropdown">

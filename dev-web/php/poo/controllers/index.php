@@ -1,17 +1,22 @@
 <?php
-class_path('Account.php');
-class_path('Human.php');
+class_path('implementation/Admin.php');
+class_path('implementation/Seller.php');
+class_path('interface/Exemple.php');
 
-$account = new Account('DANHIN', 'Bignon Elie', 'bigdanhe@gmail.com');
-$account->setSolde(200);
-$account->retrait(50);
-$account->depot(50);
+$admin = new Admin();
+$seller = new Seller();
+$seller2 = new Seller();
+$seller->addProduct('Ordinateur Toshiba');
+$seller2->addProduct('Mangue');
+$seller2->addProduct('Bible');
+$seller2->updateProduct('Bible', 'Bible Darby');
+$seller2->deleteProduct2('Bible Darby');
 
-$humain = new Humain();
+$newB = new B();
 
-$humain->setNom('DANHIN');
-// retour de la vue
-page('index.page.php', [
-    'account' => $account,
-    'humain' => $humain
-]);
+dd($newB->gretting());
+
+// dd($admin, $seller, $admin->product(), $seller->product() );
+// dd($admin, $seller, $admin->product(), $seller->product() );
+
+page('index.page.php', []);

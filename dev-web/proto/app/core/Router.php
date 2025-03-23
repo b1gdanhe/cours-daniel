@@ -21,6 +21,18 @@ class Router
         ];
     }
 
+    public function post($url, $controller, $action)
+    {
+
+        if (isset($this->routes['POST'][$url]) && !empty(($this->routes['POST'][$url]))) {
+            dd('Routes already exists');
+        }
+        $this->routes['POST'][$url] = [
+            'controller' => $controller,
+            'action' => $action,
+        ];
+    }
+
     public function route()
     {
         $uri = $_SERVER['REQUEST_URI'];
@@ -64,7 +76,7 @@ class Router
     private function showError($code, $message)
     {
         http_response_code($code);
-        require_once __DIR__ . '/../Views/errors/' . $code . '.php';
+        controller("$code.php");
         exit;
     }
 }

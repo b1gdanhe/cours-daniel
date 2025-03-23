@@ -67,16 +67,53 @@ function app_path(string $path): string
 
 function controller(string $path, $data = [])
 {
-    require base_path("controllers/{$path}");
+    require app_path("controllers/{$path}");
 }
 
 function page(string $path, $data = [])
 {
     extract($data);
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if(isset($_SESSION['flash']) && is_array($_SESSION['flash']))
+    extract($_SESSION['flash']);
     require app_path("pages/{$path}");
 }
 
 function asset(string $path)
 {
-    return  "assets/{$path}";
+    return  "/assets/{$path}";
+}
+
+function isCurrentUrl($currentUrl, $menuUrl): bool
+{
+    return $currentUrl === $menuUrl;
+}
+
+
+function redirect($path, $with = [])
+{
+    // Démarrer la session si elle n'est pas déjà démarrée
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Stocker les données temporairement en session
+    if (!empty($with)) {
+        foreach ($with as $key => $value) {
+            $_SESSION['flash'][$key] = $value;
+        }
+    }
+
+    // Rediriger vers la page demandée
+    header('Location: ' . $path);
+    exit;
+}
+
+
+function getConfig(string $configKey): mixed
+{
+    return (require(app_path('config/app.php')))[$configKey];
 }

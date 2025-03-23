@@ -9,12 +9,16 @@
 </head>
 
 <body class="p-5">
-    <div class="card p-2 shadow-sm">
-        Solde : <?= $account->getSolde() ?>
+    <div class="card p-2 shadow-sm mb-2">
+        <b> Solde total de la banque : <?= $totalAmount ?> </b>
     </div>
-    <div class="card p-2 shadow-sm">
-        Moi : <?= $humain->getNom() ?>
-    </div>
+    <ul>
+        <?php foreach ($userHistories as $userHistory) : ?>
+            <li>
+                <?= $userHistory['nom'] . ' ' . $userHistory['prenom']  . ' (' .  $userHistory['solde'] . ')' ?>
+            </li>
+        <?php endforeach ?>
+    </ul>
 </body>
 
 </html>

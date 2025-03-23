@@ -1,34 +1,62 @@
 <?php
 
 
-function dd($value, bool $die = true, string $color = 'lightgreen'): void
+
+function dd(...$args): void
 {
-    ob_start(); // Démarre la mise en mémoire tampon de sortie
-    var_export($value); // Génère une représentation de code PHP
-    $output = ob_get_clean(); // Récupère et nettoie la sortie mise en mémoire tampon
-    
-    $highlighted = highlight_string("<?php " . $output . ";", true); // Colore la sortie
-    
-    // Supprime les balises <?php et ; ajoutées par highlight_string
-    
-    $highlighted = str_replace('<?php&nbsp;', '', $highlighted);
-  
-
-    $highlighted = str_replace(';</code></pre>', '</code></pre>', $highlighted);
-    $highlighted = str_replace('#007700', htmlspecialchars($color), $highlighted);
-    $highlighted = str_replace('#DD0000', "#db4747", $highlighted);
-    $highlighted = str_replace('#0000BB', "#8c8cf8", $highlighted);
-
-    echo sprintf(
-        '<pre style="background-color:rgb(0, 0, 0); color: %s; padding: 7px; border-radius: 5px; overflow: auto; max-height: 80vh; box-shadow: 1px 1px 5px  grey ">%s</pre>',
-        htmlspecialchars($color),
-        $highlighted
-    );
-
-    if ($die) {
-        die();
+    // Set header for proper formatting in browser
+    if (!headers_sent() && php_sapi_name() !== 'cli') {
+        header('Content-Type: text/html; charset=utf-8');
     }
+
+    echo "<pre style='background-color: #1a1a1a; color: #f8f8f2; padding: 15px; margin: 10px; border-radius: 5px; font-family: monospace; font-size: 14px; line-height: 1.4; overflow: auto;'>";
+
+    // Get the backtrace to show file and line information
+    $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+    $file = $trace[0]['file'] ?? '';
+    $line = $trace[0]['line'] ?? '';
+
+    if ($file && $line) {
+        echo "<div style='margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #3a3a3a;'>";
+        echo "<strong style='color: #ff79c6;'>Called from:</strong> " . htmlspecialchars($file) . " (line " . $line . ")";
+        echo "</div>";
+    }
+
+    $count = count($args);
+    foreach ($args as $index => $arg) {
+        echo "<div" . ($index < $count - 1 ? " style='margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #3a3a3a;'" : "") . ">";
+
+        echo "<strong style='color: #8be9fd;'>Type:</strong> " . gettype($arg) . "\n";
+     //   echo "<strong style='color: #50fa7b;'>Value:</strong>\n";
+
+        if (is_bool($arg)) {
+            echo htmlspecialchars($arg ? 'true' : 'false');
+        } elseif (is_null($arg)) {
+            echo '<span style="color: #bd93f9;">null</span>';
+        } elseif (is_array($arg) || is_object($arg)) {
+            // Use var_export for arrays and objects with syntax highlighting
+            $export = var_export($arg, true);
+
+            // Simple syntax highlighting
+            $export = preg_replace('/\b(array|object|stdClass|true|false|null)\b/', '<span style="color: #bd93f9;">$1</span>', $export);
+            $export = preg_replace('/=>/', '<span style="color: #ff79c6;">=></span>', $export);
+            $export = preg_replace('/\'([^\']+)\'/', '<span style="color: #f1fa8c;">\'$1\'</span>', $export);
+            $export = preg_replace('/\b(\d+)\b/', '<span style="color: #bd93f9;">$1</span>', $export);
+
+            echo $export;
+        } else {
+            echo htmlspecialchars(var_export($arg, true));
+        }
+
+        echo "</div>";
+    }
+
+    echo "</pre>";
+
+    // Terminate script execution
+    exit(1);
 }
+
 
 function controller($path)
 {
